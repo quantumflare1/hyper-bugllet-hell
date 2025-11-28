@@ -1,0 +1,6 @@
+{
+	"pollResponse": {
+		"KEY_PRESSED": 1,
+		"KEY_HELD": 2 
+	}
+}

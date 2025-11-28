@@ -1,0 +1,32 @@
+import KeyConstants from "../constant_defs/key_constants.json" with { type: "json" };
+
+// todo: add cbf
+export default class KeyInput {
+	keysPressed = new Set();
+	keysHeld = new Set();
+	constructor() {
+		addEventListener("keydown", this.keydown.bind(this));
+		addEventListener("keyup", this.keyup.bind(this));
+	}
+	keydown(e) {
+		if (!e.repeating) {
+			this.keysPressed.add(e.code);
+			this.keysHeld.add(e.code);
+		}
+	}
+	keyup(e) {
+		this.keysPressed.delete(e.code);
+		this.keysHeld.delete(e.code);
+	}
+	poll(key) {
+		let response = 0;
+		if (this.keysPressed.has(key)) {
+			this.keysPressed.delete(key);
+			response += KeyConstants.pollResponse.KEY_PRESSED;
+		}
+		if (this.keysHeld.has(key)) {
+			response += KeyConstants.pollResponse.KEY_HELD;
+		}
+		return response;
+	}
+}
