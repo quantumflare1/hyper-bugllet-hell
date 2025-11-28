@@ -1,21 +1,24 @@
-import { Application, Assets, Sprite } from "pixi.js";
-import createPlayer from "./player.mjs";
+import { Application, Assets, autoDetectRenderer, Sprite } from "pixi.js";
+import Player from "./player.mjs";
+import { init } from "./asset_manager.mjs";
 
 (async () => {
-	// todo: move this out into its own function
+	const app = await initializeApp();
+	await init();
+
+	const player = new Player(app);
+})();
+
+async function initializeApp() {
 	const app = new Application();
 
 	await app.init({
-		background: "#1099bb",
+		background: 0x111111,
 		width: 480,
 		height: 480
 	});
 
 	document.getElementById("pixi-container").appendChild(app.canvas);
 
-	const player = createPlayer(app);
-
-	app.ticker.add((time) => {
-		player.tick(time);
-	});
-})();
+	return app;
+}
