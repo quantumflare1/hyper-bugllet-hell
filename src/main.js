@@ -1,10 +1,10 @@
 import { Application, Assets, autoDetectRenderer, Sprite } from "pixi.js";
 import Player from "./player.mjs";
-import { init } from "./asset_manager.mjs";
+import * as AssetManager from "./asset_manager.mjs";
 
 (async () => {
 	const app = await initializeApp();
-	await init();
+	await AssetManager.init();
 
 	const player = new Player(app);
 })();
