@@ -7,7 +7,7 @@ import Bullet from "./bullet.mjs";
 	const app = await initializeApp();
 	await AssetManager.init();
 
-	const player = new Player(app);
+	new Player(app);
 	new Bullet(app, 200, 200, "test_bullet.png");
 	new Bullet(app, 300, 200, "test_big_bullet.png");
 })();

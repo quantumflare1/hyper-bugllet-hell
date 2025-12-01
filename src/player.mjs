@@ -1,4 +1,4 @@
-import { Ticker, Application } from "pixi.js";
+import { Application } from "pixi.js";
 import { assets } from "./asset_manager.mjs";
 import Position from "./component/position.mjs";
 import Velocity from "./component/velocity.mjs";

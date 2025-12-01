@@ -5,4 +5,10 @@ export default class Position {
 		this.x = x;
 		this.y = y;
 	}
+	/**
+	 * @param {Position} other
+	 */
+	squaredDistanceTo(other) {
+		return (this.x - other.x) ** 2 + (this.y - other.y) ** 2;
+	}
 }
