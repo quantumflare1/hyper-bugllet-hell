@@ -6,11 +6,13 @@ export default class Velocity {
 
 	/**
 	 * @param {Position} pos 
+	 * @param {Ticker} ticker 
 	 */
-	constructor(x = 0, y = 0, pos) {
+	constructor(x = 0, y = 0, pos, ticker) {
 		this.x = x;
 		this.y = y;
 		this.pos = pos;
+		ticker.add(this.tick.bind(this));
 	}
 	/**
 	 * @param {Ticker} ticker 

@@ -11,9 +11,11 @@ export default class PlayerControl {
 
 	/**
 	 * @param {Player} parent 
+	 * @param {Ticker} ticker
 	 */
-	constructor(parent) {
+	constructor(parent, ticker) {
 		this.vel = parent.velocity;
+		ticker.add(this.tick.bind(this))
 	}
 	/**
 	 * @param {Ticker} ticker 
