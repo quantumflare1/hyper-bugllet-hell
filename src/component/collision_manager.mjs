@@ -1,15 +1,16 @@
 import { Application } from "pixi.js";
 import Collider from "./collider.mjs";
+import Scene from "../scene.mjs";
 
 export default class CollisionManager {
 	layers = [];
 	masks = [];
 
 	/**
-	 * @param {Application} app 
+	 * @param {Scene} scene 
 	 */
-	constructor(app) {
-		app.ticker.add(this.tick.bind(this));
+	constructor(scene) {
+		scene.app.ticker.add(this.tick.bind(this));
 	}
 	/**
 	 * @param {Collider} collider 

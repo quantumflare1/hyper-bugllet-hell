@@ -4,6 +4,9 @@ import Position from "./component/position.mjs";
 import Velocity from "./component/velocity.mjs";
 import EntitySprite from "./component/sprite.mjs";
 import PlayerControl from "./component/player.mjs";
+import Scene from "./scene.mjs";
+import Collider from "./component/collider.mjs";
+import PlayerConstants from "./constant_defs/player_constants.json" with { type:"json" };
 
 // TODO: make entity base class (?)
 export default class Player {
@@ -13,12 +16,13 @@ export default class Player {
 	control;
 	sprite;
 	/**
-	 * @param {Application} app 
+	 * @param {Scene} scene 
 	 */
-	constructor(app) {
+	constructor(scene) {
 		this.position = new Position(240, 240);
-		this.velocity = new Velocity(0, 0, this.position, app.ticker);
-		this.control = new PlayerControl(this, app.ticker);
-		this.sprite = new EntitySprite(assets.player, this.position, 0.5, app.stage, app.ticker);
+		this.velocity = new Velocity(0, 0, this.position, scene.app.ticker);
+		this.control = new PlayerControl(this, scene.app.ticker);
+		this.sprite = new EntitySprite(assets.player, this.position, 0.5, scene.app.stage, scene.app.ticker);
+		this.collider = new Collider(scene.collisionMgr, scene.app.ticker, PlayerConstants.HITBOX_RADIUS, PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y, PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y, this.position, 0, 1);
 	}
 }

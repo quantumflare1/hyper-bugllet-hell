@@ -2,14 +2,14 @@ import { Application, Assets, autoDetectRenderer, Sprite } from "pixi.js";
 import Player from "./player.mjs";
 import * as AssetManager from "./asset_manager.mjs";
 import Bullet from "./bullet.mjs";
+import Scene from "./scene.mjs";
 
 (async () => {
 	const app = await initializeApp();
 	await AssetManager.init();
 
-	new Player(app);
-	new Bullet(app, 200, 200, "test_bullet.png");
-	new Bullet(app, 300, 200, "test_big_bullet.png");
+	const scene = new Scene(app);
+	scene.init();
 })();
 
 async function initializeApp() {
