@@ -16,11 +16,7 @@ export default class Scene {
 	}
 	init() {
 		new Player(this);
-		new Bullet(this, 200, 200, "test_bullet.png");
-		new Bullet(this, 300, 200, "test_big_bullet.png");
-		
-		addEventListener("game_collision", (e) => {
-			console.log("collision");
-		})
+		new Bullet(this, 200, 200, 0, 0, "test_bullet.png");
+		new Bullet(this, 300, 200, 10, 30, "test_big_bullet.png");
 	}
 }

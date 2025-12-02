@@ -4,6 +4,7 @@ import KeyConstants from "../constant_defs/key_constants.json" with { type: "jso
 import { Ticker } from "pixi.js";
 import PlayerConstants from "../constant_defs/player_constants.json" with { type: "json" };
 import TimeConstants from "../constant_defs/time_constants.json" with { type: "json" };
+import { assets } from "../asset_manager.mjs";
 
 export default class PlayerControl {
 	vel;

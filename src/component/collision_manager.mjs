@@ -47,10 +47,17 @@ export default class CollisionManager {
 	 */
 	tick(ticker) {
 		for (let i = 0; i < this.masks.length; i++) {
-			for (const collider1 in this.masks[i]) {
-				for (const collider2 in this.layers[i]) {
+			for (const collider1 of this.masks[i]) {
+				for (const collider2 of this.layers[i]) {
 					if (collider1.collidesWith(collider2)) {
-						dispatchEvent(new CustomEvent("game_collision", { detail: { collider1: collider1, collider2: collider2 } }));
+						if (collider1.partner !== collider2) {
+							collider1.partnerWith(collider2);
+							dispatchEvent(new CustomEvent("game_collision", { detail: { collider1: collider1, collider2: collider2 } }));
+						}
+					}
+					else if (collider1.partner === collider2) {
+						collider1.unpartner(collider2);
+						dispatchEvent(new CustomEvent("game_decollision", { detail: { collider1: collider1, collider2: collider2 } }));
 					}
 				}
 			}

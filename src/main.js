@@ -1,7 +1,6 @@
 import { Application, Assets, autoDetectRenderer, Sprite } from "pixi.js";
-import Player from "./player.mjs";
+//import * as CDebug from "../debug/collision.mjs";
 import * as AssetManager from "./asset_manager.mjs";
-import Bullet from "./bullet.mjs";
 import Scene from "./scene.mjs";
 
 (async () => {
