@@ -1,7 +1,12 @@
-export default class Position {
+import Component from "./component.mjs";
+
+export default class Position extends Component {
+	static id = "position";
+
 	x; y;
 
 	constructor(x = 0, y = 0) {
+		super();
 		this.x = x;
 		this.y = y;
 	}

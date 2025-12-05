@@ -1,6 +1,7 @@
 import { Ticker } from "pixi.js";
 import CollisionManager from "./collision_manager.mjs";
 import Position from "./position.mjs";
+import Component from "./component.mjs";
 
 /**
  * @param {Position} pos 
@@ -17,7 +18,8 @@ function squaredPointToLineDistance(pos, collider) {
 	return pos1ToPoint - ((pos1ToPoint + pos1ToPos2 - pos2ToPoint) / (2 * Math.sqrt(pos1ToPos2))) ** 2;
 }
 
-export default class Collider {
+export default class Collider extends Component {
+	static id = "collider";
 	manager;
 	radius;
 	x1; y1; x2; y2;
@@ -37,6 +39,8 @@ export default class Collider {
 	 * @param {number} y2 
 	 */
 	constructor(manager, ticker, radius, x1, y1, x2, y2, ref, layer = 0, mask = 0) {
+		super();
+
 		manager?.addCollider(this, layer, mask);
 		this.manager = manager;
 		this.radius = radius;

@@ -1,7 +1,10 @@
 import { Ticker } from "pixi.js";
 import Position from "./position.mjs";
+import Component from "./component.mjs";
 
-export default class Velocity {
+export default class Velocity extends Component {
+	static id = "velocity";
+
 	x; y; pos;
 
 	/**
@@ -9,10 +12,12 @@ export default class Velocity {
 	 * @param {Ticker} ticker 
 	 */
 	constructor(x = 0, y = 0, pos, ticker) {
+		super();
+
 		this.x = x;
 		this.y = y;
 		this.pos = pos;
-		ticker.add(this.tick.bind(this));
+		ticker?.add(this.tick.bind(this));
 	}
 	/**
 	 * @param {Ticker} ticker 

@@ -4,9 +4,11 @@ import KeyConstants from "../constant_defs/key_constants.json" with { type: "jso
 import { Ticker } from "pixi.js";
 import PlayerConstants from "../constant_defs/player_constants.json" with { type: "json" };
 import TimeConstants from "../constant_defs/time_constants.json" with { type: "json" };
-import { assets } from "../asset_manager.mjs";
+import Component from "./component.mjs";
 
-export default class PlayerControl {
+export default class PlayerControl extends Component {
+	static id = "playerControl";
+
 	vel;
 	input = new KeyInput();
 
@@ -15,6 +17,7 @@ export default class PlayerControl {
 	 * @param {Ticker} ticker
 	 */
 	constructor(parent, ticker) {
+		super();
 		this.vel = parent.velocity;
 		ticker.add(this.tick.bind(this))
 	}

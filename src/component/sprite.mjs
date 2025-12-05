@@ -1,7 +1,9 @@
 import { Container, Sprite, Ticker } from "pixi.js";
 import Position from "./position.mjs";
+import Component from "./component.mjs";
 
-export default class EntitySprite {
+export default class EntitySprite extends Component {
+	static id = "sprite";
 	texture;
 	pos;
 
@@ -12,6 +14,8 @@ export default class EntitySprite {
 	 * @param {Ticker} ticker
 	 */
 	constructor(texture, pos, anchor = 0, stage, ticker) {
+		super();
+		
 		this.texture = Sprite.from(texture);
 		this.texture.anchor = anchor;
 		this.texture.roundPixels = true;

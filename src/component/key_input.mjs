@@ -1,10 +1,14 @@
 import KeyConstants from "../constant_defs/key_constants.json" with { type: "json" };
+import Component from "./component.mjs";
 
 // todo: add cbf
-export default class KeyInput {
+export default class KeyInput extends Component {
+	static id = "keyInput";
+
 	keysPressed = new Set();
 	keysHeld = new Set();
 	constructor() {
+		super();
 		addEventListener("keydown", this.keydown.bind(this));
 		addEventListener("keyup", this.keyup.bind(this));
 	}
