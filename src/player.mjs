@@ -7,23 +7,19 @@ import PlayerControl from "./component/player.mjs";
 import Scene from "./scene.mjs";
 import Collider from "./component/collider.mjs";
 import PlayerConstants from "./constant_defs/player_constants.json" with { type:"json" };
+import Entity from "./entity.mjs";
 
-// TODO: make entity base class (?)
-export default class Player {
-	position;
-	velocity;
-	collider;
-	control;
-	sprite;
+export default class Player extends Entity {
 	/**
 	 * @param {Scene} scene 
 	 */
 	constructor(scene) {
-		this.position = new Position(240, 240);
-		this.velocity = new Velocity(0, 0, this.position, scene.app.ticker);
-		this.control = new PlayerControl(this, scene.app.ticker);
-		this.sprite = new EntitySprite(assets.player, this.position, 0.5, scene.app.stage, scene.app.ticker);
-		this.collider = new Collider(scene.collisionMgr, scene.app.ticker, PlayerConstants.HITBOX_RADIUS, PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y, PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y, this.position, 0, 1);
+		const pos = new Position(240, 240);
+		const vel = new Velocity(0, 0, pos, scene.app.ticker);
+		const con = new PlayerControl(vel, scene.app.ticker);
+		const spr = new EntitySprite(assets.player, pos, 0.5, scene.app.stage, scene.app.ticker);
+		const col = new Collider(scene.collisionMgr, scene.app.ticker, PlayerConstants.HITBOX_RADIUS, PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y, PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y, pos, 0, 1);
+		super(pos, vel, con, spr, col);
 
 		addEventListener("game_collision", (e) => {
 			if (e.detail.collider1 === this.collider || e.detail.collider2 === this.collider) {

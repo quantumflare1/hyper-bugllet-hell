@@ -1,10 +1,10 @@
-import Player from "../player.mjs";
 import KeyInput from "./key_input.mjs";
 import KeyConstants from "../constant_defs/key_constants.json" with { type: "json" };
 import { Ticker } from "pixi.js";
 import PlayerConstants from "../constant_defs/player_constants.json" with { type: "json" };
 import TimeConstants from "../constant_defs/time_constants.json" with { type: "json" };
 import Component from "./component.mjs";
+import Velocity from "./velocity.mjs";
 
 export default class PlayerControl extends Component {
 	static id = "playerControl";
@@ -13,12 +13,12 @@ export default class PlayerControl extends Component {
 	input = new KeyInput();
 
 	/**
-	 * @param {Player} parent 
+	 * @param {Velocity} velocity 
 	 * @param {Ticker} ticker
 	 */
-	constructor(parent, ticker) {
+	constructor(velocity, ticker) {
 		super();
-		this.vel = parent.velocity;
+		this.vel = velocity;
 		ticker.add(this.tick.bind(this))
 	}
 	/**
