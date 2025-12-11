@@ -1,4 +1,4 @@
-import KeyConstants from "../constant_defs/key_constants.json" with { type: "json" };
+import Keys from "../constant_defs/key_constants.json" with { type: "json" };
 import Component from "./component.mjs";
 
 // todo: add cbf
@@ -26,10 +26,10 @@ export default class KeyInput extends Component {
 		let response = 0;
 		if (this.keysPressed.has(key)) {
 			this.keysPressed.delete(key);
-			response += KeyConstants.pollResponse.KEY_PRESSED;
+			response += Keys.pollResponse.KEY_PRESSED;
 		}
 		if (this.keysHeld.has(key)) {
-			response += KeyConstants.pollResponse.KEY_HELD;
+			response += Keys.pollResponse.KEY_HELD;
 		}
 		return response;
 	}

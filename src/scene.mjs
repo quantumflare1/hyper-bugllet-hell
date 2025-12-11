@@ -2,6 +2,7 @@ import { Application } from "pixi.js";
 import Bullet from "./bullet.mjs";
 import CollisionManager from "./component/collision_manager.mjs";
 import Player from "./player.mjs";
+import Enemy from "./enemy.mjs";
 
 export default class Scene {
 	collisionMgr;
@@ -18,5 +19,6 @@ export default class Scene {
 		new Player(this);
 		new Bullet(this, 200, 200, 0, 0, "test_bullet.png");
 		new Bullet(this, 250, 100, 10, 30, "test_big_bullet.png");
+		new Enemy(this, 200, 200, 0, 0);
 	}
 }

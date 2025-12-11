@@ -6,7 +6,7 @@ import EntitySprite from "./component/sprite.mjs";
 import PlayerControl from "./component/player.mjs";
 import Scene from "./scene.mjs";
 import Collider from "./component/collider.mjs";
-import PlayerConstants from "./constant_defs/player_constants.json" with { type:"json" };
+import PlayerConstant from "./constant_defs/player_constants.json" with { type:"json" };
 import Entity from "./entity.mjs";
 
 export default class Player extends Entity {
@@ -18,7 +18,7 @@ export default class Player extends Entity {
 		const vel = new Velocity(0, 0, pos, scene.app.ticker);
 		const con = new PlayerControl(vel, scene.app.ticker);
 		const spr = new EntitySprite(assets.player, pos, 0.5, scene.app.stage, scene.app.ticker);
-		const col = new Collider(scene.collisionMgr, scene.app.ticker, PlayerConstants.HITBOX_RADIUS, PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y, PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y, pos, 0, 1);
+		const col = new Collider(scene.collisionMgr, scene.app.ticker, PlayerConstant.HITBOX_RADIUS, PlayerConstant.HITBOX_OFFSET_X, PlayerConstant.HITBOX_OFFSET_Y, PlayerConstant.HITBOX_OFFSET_X, PlayerConstant.HITBOX_OFFSET_Y, pos, 0, 1);
 		super(pos, vel, con, spr, col);
 
 		addEventListener("game_collision", (e) => {

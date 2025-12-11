@@ -16,6 +16,7 @@ export default class Entity {
 		delete this[component.constructor.id];
 	}
 	destroy() {
+		// todo: i don't think this actually fully deletes components (functions are still referenced by ticker) so fix that
 		for (const comp in this) {
 			delete this[comp];
 		}

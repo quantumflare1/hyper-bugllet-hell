@@ -3,8 +3,8 @@ import Collider from "./collider.mjs";
 import Scene from "../scene.mjs";
 
 export default class CollisionManager {
-	layers = [];
-	masks = [];
+	layers = new Map();
+	masks = new Map();
 
 	/**
 	 * @param {Scene} scene 
@@ -16,13 +16,13 @@ export default class CollisionManager {
 	 * @param {Collider} collider 
 	 */
 	addCollider(collider, layer, mask) {
-		if (layer in this.layers) {
+		if (layer in this.layers.keys()) {
 			this.layers[layer].add(collider);
 		}
 		else {
 			this.layers[layer] = new Set([collider]);
 		}
-		if (mask in this.masks) {
+		if (mask in this.masks.keys()) {
 			this.masks[mask].add(collider);
 		}
 		else {
@@ -47,8 +47,8 @@ export default class CollisionManager {
 	 */
 	tick(ticker) {
 		for (let i = 0; i < this.masks.length; i++) {
-			for (const collider1 of this.masks[i]) {
-				for (const collider2 of this.layers[i]) {
+			for (const collider1 of this.masks.get(i)) {
+				for (const collider2 of this.layers.get(i)) {
 					if (collider1.collidesWith(collider2)) {
 						if (collider1.partner !== collider2) {
 							collider1.partnerWith(collider2);
