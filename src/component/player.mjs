@@ -5,6 +5,7 @@ import PlayerConstants from "../constant_defs/player_constants.json" with { type
 import TimeConstants from "../constant_defs/time_constants.json" with { type: "json" };
 import Component from "./component.mjs";
 import Velocity from "./velocity.mjs";
+import Timer from "./timer.mjs";
 
 export default class PlayerControl extends Component {
 	static id = "playerControl";
@@ -44,5 +45,8 @@ export default class PlayerControl extends Component {
 		else {
 			this.vel.x = 0;
 		}
+	}
+	fire() {
+
 	}
 }
