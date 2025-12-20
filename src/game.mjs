@@ -5,7 +5,7 @@ import main from "./main_scene.mjs";
 
 async function init() {
 	await initAssets();
-	const app = initializeApp();
+	const app = await initializeApp();
 
 	const scene = main(app);
 }

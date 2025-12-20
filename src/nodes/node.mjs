@@ -1,8 +1,9 @@
 export default class Node {
-	children = new WeakSet();
+	children;
 	parent;
 
 	constructor(parent) {
+		this.children = new Set();
 		this.parent = parent;
 	}
 	addChild(node) {
@@ -11,5 +12,9 @@ export default class Node {
 	removeChild(node) {
 		this.children.delete(node);
 	}
-	tick() {}
+	tick(ticker) {
+		for (const i of this.children) {
+			i.tick(ticker);
+		}
+	}
 }

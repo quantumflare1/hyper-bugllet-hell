@@ -30,4 +30,7 @@ export default class Vec2 {
 	copy() {
 		return new Vec2(this.x, this.y);
 	}
+	equals(vec) {
+		return this.x === vec.x && this.y === vec.y;
+	}
 }

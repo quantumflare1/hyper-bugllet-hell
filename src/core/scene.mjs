@@ -3,18 +3,22 @@ import { Ticker } from "pixi.js";
 export default class Scene {
 	display;
 	ticker = new Ticker();
-	nodes = new WeakSet();
+	nodes = new Set();
 
 	constructor(display) {
 		this.display = display;
 		this.ticker.autoStart = true;
+		this.ticker.add(this.tick.bind(this));
 	}
 	addChild(node) {
 		this.nodes.add(node);
-		this.ticker.add(node.tick);
 	}
 	removeChild(node) {
 		this.nodes.delete(node);
-		this.ticker.remove(node.tick);
+	}
+	tick(ticker) {
+		for (const i of this.nodes) {
+			i.tick(ticker);
+		}
 	}
 }
