@@ -1,4 +1,4 @@
-import Node from "./node.mjs";
+import Node from "../node.mjs";
 
 export default class Prefab extends Node {
 	constructor(parent) {

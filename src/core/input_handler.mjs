@@ -11,7 +11,7 @@ addEventListener("keydown", keydown);
 addEventListener("keyup", keyup);
 addEventListener("mousemove", mousemove);
 addEventListener("mousedown", mousedown);
-addEventListener("mouseup", mousedown);
+addEventListener("mouseup", mousedown); // they do the same thing!!!
 
 function keydown(e) {
 	if (!e.repeat)

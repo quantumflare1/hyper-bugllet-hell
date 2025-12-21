@@ -1,21 +1,21 @@
 import { Sprite } from "pixi.js";
 import Node from "./node.mjs";
-import { assets } from "../core/asset_manager.mjs";
 
 export default class SpriteNode extends Node {
 	source;
 	position;
 
-	constructor(parent, stage, texture, position, anchor = 0) {
+	constructor(parent, stage, texture, anchor = 0) {
 		super(parent);
 
-		this.source = Sprite.from(assets[texture]);
+		console.log(texture)
+		this.source = Sprite.from(texture);
 		this.source.anchor = anchor;
 		this.source.roundPixels = true;
 
 		stage.addChild(this.source);
 
-		this.position = position;
+		this.position = parent.position;
 	}
 	tick(ticker) {
 		super.tick(ticker);

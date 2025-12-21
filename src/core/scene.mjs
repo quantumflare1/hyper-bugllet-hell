@@ -7,6 +7,7 @@ export default class Scene {
 
 	constructor(display) {
 		this.display = display;
+		this.ticker.maxFPS = 60;
 		this.ticker.autoStart = true;
 		this.ticker.add(this.tick.bind(this));
 	}
