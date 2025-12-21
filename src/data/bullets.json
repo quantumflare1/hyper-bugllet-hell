@@ -1,0 +1,20 @@
+{
+	"testBullet": {
+		"hitbox": {
+			"cap": [0, 0],
+			"butt": [0, 0],
+			"radius": 5,
+			"layer": 0
+		},
+		"sprite": "test_bullet.png"
+	},
+	"playerBullet": {
+		"hitbox": {
+			"cap": [0, -1],
+			"butt": [0, 1],
+			"radius": 3,
+			"layer": 1
+		},
+		"sprite": "test_bullet.png"
+	}
+}

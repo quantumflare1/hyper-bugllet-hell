@@ -9,11 +9,13 @@ import { moveToRandomPosition, wait } from "../../behaviors/test_enemy.mjs";
 export default class Enemy extends Prefab {
 	position;
 	velocity;
+	health;
 
-	constructor(parent, position, velocity) {
+	constructor(parent, position, velocity, health) {
 		super(parent);
 		this.position = position;
 		this.velocity = velocity;
+		this.health = health;
 
 		super.addChild(new ColliderNode(this, new Vec2(0, 0), new Vec2(0, 0), 10, 0));
 		super.addChild(new SpriteNode(this, parent.display, assets.enemy, 0.5));

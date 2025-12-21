@@ -8,7 +8,6 @@ export default class SpriteNode extends Node {
 	constructor(parent, stage, texture, anchor = 0) {
 		super(parent);
 
-		console.log(texture)
 		this.source = Sprite.from(texture);
 		this.source.anchor = anchor;
 		this.source.roundPixels = true;
