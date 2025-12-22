@@ -7,23 +7,26 @@ import StateMachine from "../state_machine.mjs";
 import { moveToRandomPosition, wait } from "../../behaviors/test_enemy.mjs";
 
 export default class Enemy extends Prefab {
-	position;
+	position; prevPosition;
 	velocity;
 	health;
 
 	constructor(parent, position, velocity, health) {
 		super(parent);
 		this.position = position;
+		this.prevPosition = position;
 		this.velocity = velocity;
 		this.health = health;
 
-		super.addChild(new ColliderNode(this, parent.collisionManager, position, new Vec2(0, 0), 10, 0));
+		super.addChild(new ColliderNode(this, parent.collisionManager, new Vec2(0, 0), 10, 0));
 		super.addChild(new SpriteNode(this, parent.display, assets.enemy, 0.5));
 		super.addChild(new StateMachine(this, moveToRandomPosition, wait));
 	}
 	tick(ticker) {
 		super.tick(ticker);
 		
+		this.prevPosition.x = this.position.x;
+		this.prevPosition.y = this.position.y;
 		this.position.x += this.velocity.x * ticker.deltaMS / 1000;
 		this.position.y += this.velocity.y * ticker.deltaMS / 1000;
 	}

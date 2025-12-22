@@ -6,15 +6,15 @@ export default class ColliderNode extends Node {
 	radius;
 	manager;
 
-	constructor(parent, manager, position, range, radius, layer) {
+	constructor(parent, manager, range, radius, layer) {
 		super(parent);
 		this.manager = manager;
-		this.position = position;
+		this.position = parent.position;
 		this.range = range;
 		this.radius = radius;
 		this.layer = layer;
 
-		manager.addCollider(this);
+		manager?.addCollider(this);
 	}
 	collidesWith(other) {
 		// stupid chud geometry
@@ -62,8 +62,6 @@ export default class ColliderNode extends Node {
 		return Math.min(myCapToOther, myButtToOther, yourCapToOther, yourButtToOther) < (this.radius + other.radius) ** 2;
 	}
 	tick(ticker) {
-		const delta = this.parent.velocity.copy();
-		delta.multiply(ticker.deltaMS / 1000);
-		this.manager.moveCollider(this, delta);
+		this.manager.moveCollider(this, this.parent.prevPosition);
 	}
 }

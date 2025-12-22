@@ -1,4 +1,5 @@
 import Vec2 from "../math/vec2.mjs";
+import ColliderNode from "../nodes/collider.mjs";
 
 const SUBDIVISIONS_PER_AXIS = 8; // increase this if bullet spam ends up very laggy; increases memory usage
 
@@ -68,10 +69,10 @@ export default class CollisionManager {
 			this.layers[collider.layer][subareas.right][subareas.bottom].delete(collider);
 		}
 	}
-	moveCollider(collider, amount) {
-		const oldSubareas = this.getColliderSubareas(collider);
-
-		collider.position.add(amount);
+	moveCollider(collider, prevPosition) {
+		// this probably is not that efficient but we ball
+		//console.log(prevPosition)
+		const oldSubareas = this.getColliderSubareas({ position: prevPosition, range: collider.range, radius: collider.radius, layer: collider.layer });
 
 		const subareas = this.getColliderSubareas(collider);
 

@@ -1,8 +1,5 @@
 import Vec2 from "../math/vec2.mjs";
-
-function randomIntBetween(a, b) {
-	return Math.trunc(Math.random() * (b - a) + a);
-}
+import { randomIntBetween } from "../math/utils.mjs";
 
 export function moveToRandomPosition(ticker, stateMachine) {
 	if ("timePassed" in stateMachine.memories) {
