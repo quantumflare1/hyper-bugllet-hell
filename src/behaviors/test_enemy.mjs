@@ -1,7 +1,7 @@
 import Vec2 from "../math/vec2.mjs";
 
 function randomIntBetween(a, b) {
-	return Math.floor(Math.random() * (b - a) + a);
+	return Math.trunc(Math.random() * (b - a) + a);
 }
 
 export function moveToRandomPosition(ticker, stateMachine) {

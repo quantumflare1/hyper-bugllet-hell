@@ -7,6 +7,7 @@ import { keys } from "../../core/input_handler.mjs";
 import { assets } from "../../core/asset_manager.mjs";
 import Bullet from "./bullet.mjs";
 import BulletData from "../../data/bullets.json";
+import { clamp } from "../../math/utils.mjs";
 
 export default class Player extends Prefab {
 	position;
@@ -24,7 +25,7 @@ export default class Player extends Prefab {
 		this.remainingAttackCooldown = 0;
 
 		const hitboxPos = new Vec2(PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y);
-		super.addChild(new ColliderNode(this, hitboxPos, hitboxPos, PlayerConstants.HITBOX_RADIUS, 0));
+		super.addChild(new ColliderNode(this, parent.collisionManager, position, hitboxPos, PlayerConstants.HITBOX_RADIUS, 0));
 		super.addChild(new SpriteNode(this, parent.display, assets.player, 0.5));
 	}
 	tick(ticker) {
@@ -56,6 +57,9 @@ export default class Player extends Prefab {
 
 		this.position.x += this.velocity.x * ticker.deltaMS / 1000;
 		this.position.y += this.velocity.y * ticker.deltaMS / 1000;
+
+		clamp(this.position.x, 10, 470);
+		clamp(this.position.y, 10, 470);
 
 		if (keys.has("KeyZ")) {
 			if (this.remainingAttackCooldown <= 0) {

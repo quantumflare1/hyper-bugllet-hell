@@ -17,7 +17,7 @@ export default class Enemy extends Prefab {
 		this.velocity = velocity;
 		this.health = health;
 
-		super.addChild(new ColliderNode(this, new Vec2(0, 0), new Vec2(0, 0), 10, 0));
+		super.addChild(new ColliderNode(this, parent.collisionManager, position, new Vec2(0, 0), 10, 0));
 		super.addChild(new SpriteNode(this, parent.display, assets.enemy, 0.5));
 		super.addChild(new StateMachine(this, moveToRandomPosition, wait));
 	}

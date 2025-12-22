@@ -1,31 +1,43 @@
 import Node from "./node.mjs";
 
 export default class ColliderNode extends Node {
-	cap; butt;
+	position; range;
 	layer;
 	radius;
+	manager;
 
-	constructor(parent, cap, butt, radius, layer) {
+	constructor(parent, manager, position, range, radius, layer) {
 		super(parent);
-		this.cap = cap;
-		this.butt = butt;
+		this.manager = manager;
+		this.position = position;
+		this.range = range;
 		this.radius = radius;
 		this.layer = layer;
+
+		manager.addCollider(this);
 	}
 	collidesWith(other) {
 		// stupid chud geometry
-		const capToCap = other.cap.copy();
-		capToCap.subtract(this.cap);
-		const capToButt = other.butt.copy();
-		capToButt.subtract(this.cap);
-		const buttToCap = other.cap.copy();
-		buttToCap.subtract(this.butt);
-		const buttToButt = other.butt.copy();
-		buttToButt.subtract(this.butt);
-		const me = this.butt.copy();
-		me.subtract(this.cap);
-		const you = other.butt.copy();
-		you.subtract(other.cap);
+		const capToCap = other.position.copy();
+		capToCap.subtract(other.range);
+		capToCap.subtract(this.position);
+		capToCap.subtract(this.range);
+		const capToButt = other.position.copy();
+		capToButt.add(other.range);
+		capToButt.subtract(this.position);
+		capToButt.subtract(this.range);
+		const buttToCap = other.position.copy();
+		buttToCap.subtract(other.range);
+		buttToCap.subtract(this.position);
+		buttToCap.add(this.range);
+		const buttToButt = other.position.copy();
+		buttToButt.add(other.range);
+		buttToButt.subtract(this.position);
+		buttToButt.add(this.range);
+		const me = this.range.copy();
+		me.subtract(this.position);
+		const you = other.range.copy();
+		you.subtract(other.position);
 
 		const capToCapLength = capToCap.lengthSquared();
 		const capToButtLength = capToButt.lengthSquared();
@@ -50,7 +62,8 @@ export default class ColliderNode extends Node {
 		return Math.min(myCapToOther, myButtToOther, yourCapToOther, yourButtToOther) < (this.radius + other.radius) ** 2;
 	}
 	tick(ticker) {
-		this.cap.add(this.parent.velocity);
-		this.butt.add(this.parent.velocity);
+		const delta = this.parent.velocity.copy();
+		delta.multiply(ticker.deltaMS / 1000);
+		this.manager.moveCollider(this, delta);
 	}
 }

@@ -23,13 +23,13 @@ export default class Bullet extends Prefab {
 		this.velocity = velocity;
 
 		const hitbox = {
-			cap: new Vec2(BulletData[id].hitbox.cap[0], BulletData[id].hitbox.cap[1]),
+			//cap: new Vec2(BulletData[id].hitbox.cap[0], BulletData[id].hitbox.cap[1]),
 			butt: new Vec2(BulletData[id].hitbox.butt[0], BulletData[id].hitbox.butt[1]),
 			radius: BulletData[id].hitbox.radius,
 			layer: BulletData[id].hitbox.layer
 		};
 
-		super.addChild(new ColliderNode(this, hitbox.cap, hitbox.butt, hitbox.radius, hitbox.layer));
+		super.addChild(new ColliderNode(this, parent.collisionManager, position, hitbox.butt, hitbox.radius, hitbox.layer));
 		super.addChild(new SpriteNode(this, parent.display, assets.bulletSheet.textures[BulletData[id].sprite], 0.5));
 		//super.addChild(behavior); // still not totally sure how behaviors will work
 	}
