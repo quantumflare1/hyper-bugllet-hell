@@ -8,6 +8,7 @@ export default class ColliderNode extends Node {
 
 	constructor(parent, manager, range, radius, layer) {
 		super(parent);
+		parent.collider = this;
 		this.manager = manager;
 		this.position = parent.position;
 		this.range = range;

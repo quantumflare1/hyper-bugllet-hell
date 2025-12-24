@@ -125,4 +125,18 @@ export default class CollisionManager {
 			}
 		}
 	}
+	colliding(collider) {
+		const allColliding = [];
+		const subareas = this.getColliderSubareas(collider);
+		for (const i of this.layers[collider.layer][subareas.left][subareas.top]) {
+			if (i === collider) {
+				continue;
+			}
+
+			if (collider.collidesWith(i)) {
+				allColliding.push(i);
+			}
+		}
+		return allColliding;
+	}
 }

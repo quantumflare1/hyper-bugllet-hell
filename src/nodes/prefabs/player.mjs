@@ -66,5 +66,9 @@ export default class Player extends Prefab {
 				new Bullet(this.parent, this.position.copy(), new Vec2(0, -960), "playerBullet");
 			}
 		}
+
+		for (const i of this.parent.collisionManager.colliding(this.collider)) {
+			console.log("OW OW OW");
+		}
 	}
 }
