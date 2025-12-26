@@ -1,20 +1,22 @@
 {
 	"test_bullet": {
 		"hitbox": {
-			"cap": [0, 0],
-			"butt": [0, 0],
+			"rangeX": 0,
+			"rangeY": 0,
 			"radius": 5,
 			"layer": 0
 		},
-		"sprite": "test_bullet.png"
+		"sprite": "test_bullet.png",
+		"health": 1
 	},
 	"base_player_bullet": {
 		"hitbox": {
-			"cap": [0, -1],
-			"butt": [0, 1],
+			"rangeX": 0,
+			"rangeY": 1,
 			"radius": 3,
 			"layer": 1
 		},
-		"sprite": "test_bullet.png"
+		"sprite": "test_bullet.png",
+		"health": 2
 	}
 }

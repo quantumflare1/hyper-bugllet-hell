@@ -1,40 +1,24 @@
-import ColliderNode from "../collider.mjs";
-import SpriteNode from "../sprite.mjs";
-import Prefab from "./prefab.mjs";
 import Vec2 from "../../math/vec2.mjs";
 import { assets } from "../../core/asset_manager.mjs";
 import BulletData from "../../data/bullet_data.json" with { type: "json" };
 import StateMachine from "../state_machine.mjs";
+import GlobalConstants from "../../constant_defs/global_constants.json";
+import Actor from "./actor.mjs";
 
-export default class Bullet extends Prefab {
-	position; prevPosition;
-	velocity;
+export default class Bullet extends Actor {
+	alreadyCollided = new Set();
 
-	alreadyCollidedWith = new Set();
-
-	static convertJSONToHitbox(data) {
-		return {
-			cap: new Vec2(data.cap[0], data.cap[1]),
-			butt: new Vec2(data.butt[0], data.butt[1]),
-			radius: data.radius,
-			layer: data.layer
-		};
-	}
 	constructor(parent, position, id) {
-		super(parent);
-		this.position = position;
-		this.prevPosition = position;
-		this.velocity = new Vec2(0, 0);
-
 		const hitbox = {
-			//cap: new Vec2(BulletData[id].hitbox.cap[0], BulletData[id].hitbox.cap[1]),
-			butt: new Vec2(BulletData[id].hitbox.butt[0], BulletData[id].hitbox.butt[1]),
+			range: new Vec2(BulletData[id].hitbox.rangeX, BulletData[id].hitbox.rangeY),
 			radius: BulletData[id].hitbox.radius,
 			layer: BulletData[id].hitbox.layer
 		};
-
-		super.addChild(new SpriteNode(this, parent.display, assets.bulletSheet.textures[BulletData[id].sprite], 0.5));
-		super.addChild(new ColliderNode(this, parent.collisionManager, hitbox.butt, hitbox.radius, hitbox.layer, parent.display));
+		const sprite = {
+			texture: assets.bulletSheet.textures[BulletData[id].sprite],
+			anchor: 0.5
+		};
+		super(parent, position, BulletData[id].health, hitbox, sprite);
 
 		const self = this;
 		import(`../../behaviors/${id}.mjs`).then((res) => {
@@ -44,10 +28,11 @@ export default class Bullet extends Prefab {
 	tick(ticker) {
 		super.tick(ticker);
 
-		this.prevPosition.x = this.position.x;
-		this.prevPosition.y = this.position.y;
-		// placeholder behavior
-		this.position.x += this.velocity.x * ticker.deltaMS / 1000;
-		this.position.y += this.velocity.y * ticker.deltaMS / 1000;
+		super.move(ticker);
+
+		if (this.position.x < -GlobalConstants.FIELD_WIDTH || this.position.x > GlobalConstants.FIELD_WIDTH * 2 || this.position.y < -GlobalConstants.FIELD_HEIGHT || this.position.y > GlobalConstants.FIELD_HEIGHT * 2) {
+			this.parent.removeChild(this);
+			this.sprite.destroy();
+		}
 	}
 }

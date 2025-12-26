@@ -28,8 +28,11 @@ export default class Enemy extends Actor {
 		super.move(ticker);
 
 		for (const i of this.parent.collisionManager.colliding(this.collider)) {
-			this.health--;
-			console.log("ow i am at " + this.health + " health")
+			if (!i.parent.alreadyCollided.has(this)) {
+				i.parent.alreadyCollided.add(this);
+				this.health -= i.parent.health;
+				console.log("ow i am at " + this.health + " health")
+			}
 		} // note: iframes aren't a thing and also damage is dealth 4 times for some reason
 		if (this.health <= 0) {
 			this.parent.removeChild(this);
