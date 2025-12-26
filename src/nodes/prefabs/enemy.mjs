@@ -1,25 +1,26 @@
-import ColliderNode from "../collider.mjs";
-import SpriteNode from "../sprite.mjs";
 import Vec2 from "../../math/vec2.mjs";
 import { assets } from "../../core/asset_manager.mjs";
 import StateMachine from "../state_machine.mjs";
-import { moveToRandomPosition, wait } from "../../behaviors/test_enemy.mjs";
 import Actor from "./actor.mjs";
+import EnemyData from "../../data/enemy_data.json";
 
 export default class Enemy extends Actor {
-	constructor(parent, position, velocity, health) {
-		const hitbox = { // put all this in a json later
-			range: new Vec2(0, 0),
-			radius: 10,
+	constructor(parent, position, id) {
+		const hitbox = {
+			range: new Vec2(EnemyData[id].hitbox.rangeX, EnemyData[id].hitbox.rangeY),
+			radius: EnemyData[id].hitbox.radius,
 			layer: 1
 		};
 		const sprite = {
-			texture: assets.enemy,
+			texture: assets[EnemyData[id].sprite],
 			anchor: 0.5
 		};
-		super(parent, position, velocity, health, hitbox, sprite);
+		super(parent, position, EnemyData[id].health, hitbox, sprite);
 
-		super.addChild(new StateMachine(this, moveToRandomPosition, wait));
+		const self = this;
+		import(`../../behaviors/${id}.mjs`).then((res) => {
+			self.addChild(new StateMachine(self, ...res.default));
+		});
 	}
 	tick(ticker) {
 		super.tick(ticker);
@@ -29,7 +30,7 @@ export default class Enemy extends Actor {
 		for (const i of this.parent.collisionManager.colliding(this.collider)) {
 			this.health--;
 			console.log("ow i am at " + this.health + " health")
-		}
+		} // note: iframes aren't a thing and also damage is dealth 4 times for some reason
 		if (this.health <= 0) {
 			this.parent.removeChild(this);
 			this.sprite.destroy();

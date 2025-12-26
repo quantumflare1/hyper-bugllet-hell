@@ -1,5 +1,5 @@
 {
-	"testBullet": {
+	"test_bullet": {
 		"hitbox": {
 			"cap": [0, 0],
 			"butt": [0, 0],
@@ -8,7 +8,7 @@
 		},
 		"sprite": "test_bullet.png"
 	},
-	"playerBullet": {
+	"base_player_bullet": {
 		"hitbox": {
 			"cap": [0, -1],
 			"butt": [0, 1],

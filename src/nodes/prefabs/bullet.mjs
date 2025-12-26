@@ -3,7 +3,8 @@ import SpriteNode from "../sprite.mjs";
 import Prefab from "./prefab.mjs";
 import Vec2 from "../../math/vec2.mjs";
 import { assets } from "../../core/asset_manager.mjs";
-import BulletData from "../../data/bullets.json" with { type: "json" };
+import BulletData from "../../data/bullet_data.json" with { type: "json" };
+import StateMachine from "../state_machine.mjs";
 
 export default class Bullet extends Prefab {
 	position; prevPosition;
@@ -17,11 +18,11 @@ export default class Bullet extends Prefab {
 			layer: data.layer
 		};
 	}
-	constructor(parent, position, velocity, id, behavior) {
+	constructor(parent, position, id) {
 		super(parent);
 		this.position = position;
 		this.prevPosition = position;
-		this.velocity = velocity;
+		this.velocity = new Vec2(0, 0);
 
 		const hitbox = {
 			//cap: new Vec2(BulletData[id].hitbox.cap[0], BulletData[id].hitbox.cap[1]),
@@ -32,7 +33,11 @@ export default class Bullet extends Prefab {
 
 		super.addChild(new SpriteNode(this, parent.display, assets.bulletSheet.textures[BulletData[id].sprite], 0.5));
 		super.addChild(new ColliderNode(this, parent.collisionManager, hitbox.butt, hitbox.radius, hitbox.layer, parent.display));
-		//super.addChild(behavior); // still not totally sure how behaviors will work
+
+		const self = this;
+		import(`../../behaviors/${id}.mjs`).then((res) => {
+			self.addChild(new StateMachine(self, ...res.default));
+		});
 	}
 	tick(ticker) {
 		super.tick(ticker);

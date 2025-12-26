@@ -6,8 +6,8 @@ import Player from "./nodes/prefabs/player.mjs";
 
 export default function main(app) {
 	const scene = new Scene(app.stage);
-	new Player(scene, new Vec2(240, 240), new Vec2(0, 0), 5);
-	new Bullet(scene, new Vec2(200, 200), new Vec2(40, -10), "testBullet");
-	new Enemy(scene, new Vec2(240, 80), new Vec2(0, 0), 10);
+	new Player(scene, new Vec2(240, 240), 5);
+	new Bullet(scene, new Vec2(200, 200), "test_bullet");
+	new Enemy(scene, new Vec2(240, 80), "test_enemy");
 
 }

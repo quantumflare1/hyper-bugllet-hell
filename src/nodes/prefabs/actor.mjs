@@ -1,3 +1,4 @@
+import Vec2 from "../../math/vec2.mjs";
 import ColliderNode from "../collider.mjs";
 import SpriteNode from "../sprite.mjs";
 import Prefab from "./prefab.mjs";
@@ -8,11 +9,11 @@ export default class Actor extends Prefab {
 	prevPosition;
 	health;
 
-	constructor(parent, position, velocity, health, collider, sprite) {
+	constructor(parent, position, health, collider, sprite) {
 		super(parent);
 		this.position = position;
 		this.prevPosition = position;
-		this.velocity = velocity;
+		this.velocity = new Vec2(0, 0);
 		this.health = health;
 		
 		super.addChild(new ColliderNode(this, parent.collisionManager, collider.range, collider.radius, collider.layer));

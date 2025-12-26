@@ -1,0 +1,11 @@
+{
+	"test_enemy": {
+		"hitbox": {
+			"rangeX": 0,
+			"rangeY": 0,
+			"radius": 10
+		},
+		"sprite": "enemy",
+		"health": 10
+	}
+}

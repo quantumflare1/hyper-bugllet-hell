@@ -9,7 +9,7 @@ export default class Player extends Actor {
 	attackCooldown;
 	remainingAttackCooldown;
 	
-	constructor(parent, position, velocity, health) {
+	constructor(parent, position, health) {
 		const hitbox = {
 			range: new Vec2(PlayerConstants.HITBOX_OFFSET_X, PlayerConstants.HITBOX_OFFSET_Y),
 			radius: PlayerConstants.HITBOX_RADIUS,
@@ -19,7 +19,7 @@ export default class Player extends Actor {
 			texture: assets.player,
 			anchor: 0.5
 		};
-		super(parent, position, velocity, health, hitbox, sprite);
+		super(parent, position, health, hitbox, sprite);
 
 		this.attackCooldown = PlayerConstants.BASE_ATTACK_COOLDOWN;
 		this.remainingAttackCooldown = 0;
@@ -57,7 +57,7 @@ export default class Player extends Actor {
 		if (keys.has("KeyZ")) {
 			if (this.remainingAttackCooldown <= 0) {
 				this.remainingAttackCooldown = this.attackCooldown;
-				new Bullet(this.parent, this.position.copy(), new Vec2(0, -960), "playerBullet");
+				new Bullet(this.parent, this.position.copy(), "base_player_bullet");
 			}
 		}
 
