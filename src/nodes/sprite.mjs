@@ -7,6 +7,7 @@ export default class SpriteNode extends Node {
 
 	constructor(parent, stage, texture, anchor = 0) {
 		super(parent);
+		parent.sprite = this;
 
 		this.source = Sprite.from(texture);
 		this.source.anchor = anchor;
@@ -15,6 +16,9 @@ export default class SpriteNode extends Node {
 		stage.addChild(this.source);
 
 		this.position = parent.position;
+	}
+	destroy() {
+		this.source.destroy();
 	}
 	tick(ticker) {
 		super.tick(ticker);

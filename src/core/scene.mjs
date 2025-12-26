@@ -18,6 +18,7 @@ export default class Scene {
 		this.nodes.add(node);
 	}
 	removeChild(node) {
+		node.children.clear();
 		this.nodes.delete(node);
 	}
 	tick(ticker) {

@@ -126,14 +126,37 @@ export default class CollisionManager {
 		}
 	}
 	colliding(collider) {
-		const allColliding = [];
-		const subareas = this.getColliderSubareas(collider);
-		for (const i of this.layers[collider.layer][subareas.left][subareas.top]) {
-			if (i === collider) {
-				continue;
+		function checkTwoColliders(col1, col2) {
+			if (col1 === col2) {
+				return false;
 			}
 
-			if (collider.collidesWith(i)) {
+			if (col1.collidesWith(col2)) {
+				return true;
+			}
+		}
+		const allColliding = [];
+		const subareas = this.getColliderSubareas(collider);
+		
+		if (!subareas) return allColliding;
+
+		for (const i of this.layers[collider.layer][subareas.left][subareas.top]) {
+			if (checkTwoColliders(collider, i)) {
+				allColliding.push(i);
+			}
+		}
+		for (const i of this.layers[collider.layer][subareas.right][subareas.top]) {
+			if (checkTwoColliders(collider, i)) {
+				allColliding.push(i);
+			}
+		}
+		for (const i of this.layers[collider.layer][subareas.left][subareas.bottom]) {
+			if (checkTwoColliders(collider, i)) {
+				allColliding.push(i);
+			}
+		}
+		for (const i of this.layers[collider.layer][subareas.right][subareas.bottom]) {
+			if (checkTwoColliders(collider, i)) {
 				allColliding.push(i);
 			}
 		}

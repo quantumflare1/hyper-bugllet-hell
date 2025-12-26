@@ -30,8 +30,8 @@ export default class Bullet extends Prefab {
 			layer: BulletData[id].hitbox.layer
 		};
 
-		super.addChild(new ColliderNode(this, parent.collisionManager, hitbox.butt, hitbox.radius, hitbox.layer));
 		super.addChild(new SpriteNode(this, parent.display, assets.bulletSheet.textures[BulletData[id].sprite], 0.5));
+		super.addChild(new ColliderNode(this, parent.collisionManager, hitbox.butt, hitbox.radius, hitbox.layer, parent.display));
 		//super.addChild(behavior); // still not totally sure how behaviors will work
 	}
 	tick(ticker) {

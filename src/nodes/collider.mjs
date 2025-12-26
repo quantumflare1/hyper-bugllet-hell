@@ -1,4 +1,7 @@
 import Node from "./node.mjs";
+import { Graphics } from "pixi.js";
+import GlobalConstants from "../constant_defs/global_constants.json";
+import HitboxDebugNode from "./debug_hitbox.mjs";
 
 export default class ColliderNode extends Node {
 	position; range;
@@ -6,7 +9,7 @@ export default class ColliderNode extends Node {
 	radius;
 	manager;
 
-	constructor(parent, manager, range, radius, layer) {
+	constructor(parent, manager, range, radius, layer, stage = null) {
 		super(parent);
 		parent.collider = this;
 		this.manager = manager;
@@ -14,6 +17,10 @@ export default class ColliderNode extends Node {
 		this.range = range;
 		this.radius = radius;
 		this.layer = layer;
+
+		/*if (GlobalConstants.DEBUG && stage) {
+			this.addChild(new HitboxDebugNode(this, stage));
+		}*/
 
 		manager?.addCollider(this);
 	}
