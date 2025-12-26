@@ -10,6 +10,8 @@ export default class Bullet extends Prefab {
 	position; prevPosition;
 	velocity;
 
+	alreadyCollidedWith = new Set();
+
 	static convertJSONToHitbox(data) {
 		return {
 			cap: new Vec2(data.cap[0], data.cap[1]),
