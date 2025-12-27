@@ -5,10 +5,13 @@ import { assets } from "../../core/asset_manager.mjs";
 import Bullet from "./bullet.mjs";
 import Actor from "./actor.mjs";
 import { BitmapText } from "pixi.js";
+import PlayerControl from "../player_movement.mjs";
 
 export default class Player extends Actor {
 	attackCooldown;
 	remainingAttackCooldown;
+	isShooting;
+	controls;
 	
 	constructor(parent, position, health) {
 		const hitbox = {
@@ -22,44 +25,22 @@ export default class Player extends Actor {
 		};
 		super(parent, position, health, hitbox, sprite);
 
+		this.controls = new PlayerControl(this);
+		this.addChild(this.controls);
 		this.attackCooldown = PlayerConstants.BASE_ATTACK_COOLDOWN;
 		this.remainingAttackCooldown = 0;
-
+		this.isShooting = false;
 	}
 	tick(ticker) {
 		super.tick(ticker);
 
 		this.remainingAttackCooldown -= ticker.deltaMS;
 
-		let netVelocityX = 0;
-		let netVelocityY = 0;
-		if (keys.has("ArrowUp")) {
-			netVelocityY -= PlayerConstants.BASE_MOVEMENT_SPEED;
-		}
-		if (keys.has("ArrowDown")) {
-			netVelocityY += PlayerConstants.BASE_MOVEMENT_SPEED;
-		}
-		if (keys.has("ArrowLeft")) {
-			netVelocityX -= PlayerConstants.BASE_MOVEMENT_SPEED;
-		}
-		if (keys.has("ArrowRight")) {
-			netVelocityX += PlayerConstants.BASE_MOVEMENT_SPEED;
-		}
-		if (keys.has("ShiftLeft")) {
-			netVelocityX *= PlayerConstants.FOCUS_MOVEMENT_MULTIPLIER;
-			netVelocityY *= PlayerConstants.FOCUS_MOVEMENT_MULTIPLIER;
-		}
-
-		this.velocity.x = netVelocityX;
-		this.velocity.y = netVelocityY;
-
 		super.move(ticker);
 
-		if (keys.has("KeyZ")) {
-			if (this.remainingAttackCooldown <= 0) {
-				this.remainingAttackCooldown = this.attackCooldown;
-				new Bullet(this.parent, this.position.copy(), "base_player_bullet");
-			}
+		if (this.isShooting && this.remainingAttackCooldown <= 0) {
+			this.remainingAttackCooldown = this.attackCooldown;
+			new Bullet(this.parent, this.position.copy(), "base_player_bullet");
 		}
 
 		for (const i of this.parent.collisionManager.colliding(this.collider)) {
@@ -80,6 +61,8 @@ export default class Player extends Actor {
 					});
 					text.position.set(20, 20);
 					this.parent.display.addChild(text);
+
+					this.parent.pause();
 				}
 			}
 		}

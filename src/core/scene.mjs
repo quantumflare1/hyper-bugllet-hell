@@ -27,4 +27,10 @@ export default class Scene {
 			i.tick(ticker);
 		}
 	}
+	pause() {
+		this.ticker.stop();
+	}
+	resume() {
+		this.ticker.start();
+	}
 }

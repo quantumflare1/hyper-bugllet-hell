@@ -7,7 +7,7 @@ import StatDisplay from "./nodes/prefabs/stat_display.mjs";
 
 export default function main(app) {
 	const scene = new Scene(app.stage);
-	const player = new Player(scene, new Vec2(240, 240), 5);
+	const player = new Player(scene, new Vec2(240, 240), 3);
 	new Enemy(scene, new Vec2(240, 80), "test_enemy");
 	new StatDisplay(scene, player, "health", new Vec2(475, 5), new Vec2(1, 0));
 }
