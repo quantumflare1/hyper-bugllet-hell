@@ -8,6 +8,7 @@ async function init() {
 	assets.playerDamaged = await Assets.load("../assets/player_damage.png");
 	assets.bulletSheet = await Assets.load("../assets/spritesheet/bullets.json");
 	assets.enemy = await Assets.load("../assets/enemy_temp.png");
+	assets.font = await Assets.load("../assets/fonts/NotJamLaika11.fnt");
 }
 
 export { init, assets };

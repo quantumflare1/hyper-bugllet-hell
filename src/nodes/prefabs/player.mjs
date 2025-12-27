@@ -64,6 +64,7 @@ export default class Player extends Actor {
 		for (const i of this.parent.collisionManager.colliding(this.collider)) {
 			if (!i.parent.alreadyCollided.has(this)) {
 				i.parent.alreadyCollided.add(this);
+				this.health -= i.parent.health;
 				console.log("OW OW OW");
 			}
 		}
