@@ -47,7 +47,7 @@ export default class Player extends Actor {
 
 		if (this.isShooting && this.remainingAttackCooldown <= 0) {
 			this.remainingAttackCooldown = this.attackCooldown;
-			new Bullet(this.parent, this.position.copy(), "base_player_bullet");
+			new Bullet(this.parent, this.position.copy(), "player");
 		}
 
 		for (const i of this.parent.collisionManager.colliding(this.collider)) {

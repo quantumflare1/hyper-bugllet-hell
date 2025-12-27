@@ -8,7 +8,7 @@ export default class Level extends Scene {
 		super(display);
 
 		const self = this;
-		import(`./${id}.mjs`).then((res) => {
+		import(`./level_${id}.mjs`).then((res) => {
 			self.addChild(new StateMachine(self, ...res.default));
 		});
 	}

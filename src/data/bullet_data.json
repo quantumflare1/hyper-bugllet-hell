@@ -1,5 +1,5 @@
 {
-	"test_bullet": {
+	"test": {
 		"hitbox": {
 			"rangeX": 0,
 			"rangeY": 0,
@@ -9,7 +9,7 @@
 		"sprite": "test_bullet.png",
 		"health": 1
 	},
-	"base_player_bullet": {
+	"player": {
 		"hitbox": {
 			"rangeX": 0,
 			"rangeY": 1,

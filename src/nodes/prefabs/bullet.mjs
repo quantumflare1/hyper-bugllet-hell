@@ -21,7 +21,7 @@ export default class Bullet extends Actor {
 		super(parent, position, BulletData[id].health, hitbox, sprite);
 
 		const self = this;
-		import(`../../behaviors/${id}.mjs`).then((res) => {
+		import(`../../behaviors/bullet_${id}.mjs`).then((res) => {
 			self.addChild(new StateMachine(self, ...res.default));
 		});
 	}

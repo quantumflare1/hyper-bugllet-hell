@@ -26,7 +26,7 @@ function wait() {
 	if ("startTime" in this.state.memories) {
 		if (this.state.timePassed - this.state.memories.startTime >= WAIT_TIME) {
 			delete this.state.memories.startTime;
-			new Bullet(this.parent, this.position.copy(), "test_bullet");
+			new Bullet(this.parent, this.position.copy(), "test");
 			return 0;
 		}
 		return 1;

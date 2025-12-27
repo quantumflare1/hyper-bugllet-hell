@@ -1,5 +1,5 @@
 {
-	"test_enemy": {
+	"test": {
 		"hitbox": {
 			"rangeX": 0,
 			"rangeY": 0,

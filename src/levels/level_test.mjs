@@ -7,8 +7,8 @@ function testWave() {
 	if ("interval" in this.state.memories) {
 		if (this.state.timePassed - this.state.memories.startTime >= this.state.memories.interval) {
 			this.state.memories.startTime = this.state.timePassed;
-			//this.enemies.add(new Enemy(this, new Vec2(randomIntBetween(0, GlobalConstants.FIELD_WIDTH), -40), "test_enemy"));
-			new Enemy(this, new Vec2(randomIntBetween(0, GlobalConstants.FIELD_WIDTH), -40), "test_enemy")
+			//this.enemies.add(new Enemy(this, new Vec2(randomIntBetween(0, GlobalConstants.FIELD_WIDTH), -40), "test"));
+			new Enemy(this, new Vec2(randomIntBetween(0, GlobalConstants.FIELD_WIDTH), -40), "test")
 		}
 		return 0;
 	}

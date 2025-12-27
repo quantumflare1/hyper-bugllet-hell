@@ -19,7 +19,7 @@ export default class Enemy extends Actor {
 		super(parent, position, EnemyData[id].health, hitbox, sprite);
 
 		const self = this;
-		import(`../../behaviors/${id}.mjs`).then((res) => {
+		import(`../../behaviors/enemy_${id}.mjs`).then((res) => {
 			self.addChild(new StateMachine(self, ...res.default));
 		});
 	}
