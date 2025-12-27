@@ -12,6 +12,7 @@ export default class Player extends Actor {
 	remainingAttackCooldown;
 	isShooting;
 	controls;
+	score;
 	
 	constructor(parent, position, health) {
 		const hitbox = {
@@ -30,6 +31,12 @@ export default class Player extends Actor {
 		this.attackCooldown = PlayerConstants.BASE_ATTACK_COOLDOWN;
 		this.remainingAttackCooldown = 0;
 		this.isShooting = false;
+		this.score = 0;
+
+		addEventListener("game_enemydefeat", this.scoreUp.bind(this));
+	}
+	scoreUp(e) {
+		this.score += e.detail;
 	}
 	tick(ticker) {
 		super.tick(ticker);
@@ -44,7 +51,7 @@ export default class Player extends Actor {
 		}
 
 		for (const i of this.parent.collisionManager.colliding(this.collider)) {
-			if (!i.parent.alreadyCollided.has(this)) {
+			if (i.parent instanceof Bullet && !i.parent.alreadyCollided.has(this)) {
 				i.parent.alreadyCollided.add(this);
 				this.health -= i.parent.health;
 				console.log("OW OW OW");

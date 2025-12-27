@@ -3,6 +3,7 @@ import { assets } from "../../core/asset_manager.mjs";
 import StateMachine from "../state_machine.mjs";
 import Actor from "./actor.mjs";
 import EnemyData from "../../data/enemy_data.json";
+import Bullet from "./bullet.mjs";
 
 export default class Enemy extends Actor {
 	constructor(parent, position, id) {
@@ -28,7 +29,7 @@ export default class Enemy extends Actor {
 		super.move(ticker);
 
 		for (const i of this.parent.collisionManager.colliding(this.collider)) {
-			if (!i.parent.alreadyCollided.has(this)) {
+			if (i.parent instanceof Bullet && !i.parent.alreadyCollided.has(this)) {
 				i.parent.alreadyCollided.add(this);
 				this.health -= i.parent.health;
 				console.log("ow i am at " + this.health + " health")
@@ -37,6 +38,7 @@ export default class Enemy extends Actor {
 		if (this.health <= 0) {
 			this.parent.removeChild(this);
 			this.sprite.destroy();
+			dispatchEvent(new CustomEvent("game_enemydefeat", { detail: 1 }))
 		}
 	}
 }

@@ -1,0 +1,15 @@
+import Scene from "../core/scene.mjs";
+import StateMachine from "../nodes/state_machine.mjs";
+
+export default class Level extends Scene {
+	enemies = new Set();
+
+	constructor(display, id) {
+		super(display);
+
+		const self = this;
+		import(`./${id}.mjs`).then((res) => {
+			self.addChild(new StateMachine(self, ...res.default));
+		});
+	}
+}
