@@ -15,8 +15,7 @@ export default class StatDisplay extends Prefab {
 			style: {
 				fontFamily: "Not Jam Laika 11",
 				fontSize: 11,
-				fill: 0xffffff,
-				align: "left"
+				fill: 0xffffff
 			}
 		});
 

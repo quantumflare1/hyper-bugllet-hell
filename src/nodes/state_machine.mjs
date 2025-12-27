@@ -8,8 +8,9 @@ export default class StateMachine extends Node {
 
 	constructor(parent, ...states) {
 		super(parent);
+		parent.state = this;
 		for (const state of states) {
-			this.states.push(state.bind(this));
+			this.states.push(state.bind(parent));
 		}
 	}
 	tick(ticker) {

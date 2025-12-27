@@ -4,6 +4,7 @@ import { keys } from "../../core/input_handler.mjs";
 import { assets } from "../../core/asset_manager.mjs";
 import Bullet from "./bullet.mjs";
 import Actor from "./actor.mjs";
+import { BitmapText } from "pixi.js";
 
 export default class Player extends Actor {
 	attackCooldown;
@@ -66,6 +67,20 @@ export default class Player extends Actor {
 				i.parent.alreadyCollided.add(this);
 				this.health -= i.parent.health;
 				console.log("OW OW OW");
+
+				if (this.health <= 0) {
+					// todo: move this to level code
+					const text = new BitmapText({
+						text: "YOU SNOOZE YOU LOSE!",
+						style: {
+							fontFamily: "Not Jam Laika 11",
+							fontSize: 11,
+							fill: 0xffffff
+						}
+					});
+					text.position.set(20, 20);
+					this.parent.display.addChild(text);
+				}
 			}
 		}
 	}
