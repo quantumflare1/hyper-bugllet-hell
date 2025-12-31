@@ -14,11 +14,11 @@ export default class Actor extends Prefab {
 
 	despawnTimer;
 
-	constructor(parent, position, health, collider, sprite) {
+	constructor(parent, position, velocity, health, collider, sprite) {
 		super(parent);
 		this.position = position;
 		this.prevPosition = position;
-		this.velocity = new Vec2(0, 0);
+		this.velocity = velocity;
 		this.health = health;
 		this.despawnTimer = 0;
 		

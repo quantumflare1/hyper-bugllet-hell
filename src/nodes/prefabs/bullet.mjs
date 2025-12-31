@@ -2,14 +2,13 @@ import Vec2 from "../../math/vec2.mjs";
 import { assets } from "../../core/asset_manager.mjs";
 import BulletData from "../../data/bullet_data.json" with { type: "json" };
 import StateMachine from "../state_machine.mjs";
-import GlobalConstants from "../../constant_defs/global_constants.json";
 import Actor from "./actor.mjs";
 import SpriteNode from "../sprite.mjs";
 
 export default class Bullet extends Actor {
 	alreadyCollided = new Set();
 
-	constructor(parent, position, id, color = null) {
+	constructor(parent, position, velocity, id, color = null) {
 		const hitbox = {
 			range: new Vec2(BulletData[id].hitbox.rangeX, BulletData[id].hitbox.rangeY),
 			radius: BulletData[id].hitbox.radius,
@@ -19,7 +18,7 @@ export default class Bullet extends Actor {
 			texture: assets.bulletSheet.textures[BulletData[id].sprite],
 			anchor: 0.5
 		};
-		super(parent, position, BulletData[id].health, hitbox, sprite);
+		super(parent, position, velocity, BulletData[id].health, hitbox, sprite);
 
 		const fill = {
 			texture: assets.bulletSheet.textures[BulletData[id].innerSprite],

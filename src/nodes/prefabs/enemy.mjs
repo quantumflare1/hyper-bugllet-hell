@@ -16,7 +16,7 @@ export default class Enemy extends Actor {
 			texture: assets[EnemyData[id].sprite],
 			anchor: 0.5
 		};
-		super(parent, position, EnemyData[id].health, hitbox, sprite);
+		super(parent, position, new Vec2(0, 0), EnemyData[id].health, hitbox, sprite);
 
 		const self = this;
 		import(`../../behaviors/enemy_${id}.mjs`).then((res) => {
