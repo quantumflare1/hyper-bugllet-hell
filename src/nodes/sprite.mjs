@@ -5,13 +5,14 @@ export default class SpriteNode extends Node {
 	source;
 	position;
 
-	constructor(parent, stage, texture, anchor = 0) {
+	constructor(parent, stage, texture, anchor = 0, tint = null) {
 		super(parent);
 		parent.sprite = this;
 
 		this.source = Sprite.from(texture);
 		this.source.anchor = anchor;
 		this.source.roundPixels = true;
+		this.source.tint = tint;
 
 		stage.addChild(this.source);
 
