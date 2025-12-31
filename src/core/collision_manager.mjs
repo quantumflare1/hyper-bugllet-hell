@@ -1,6 +1,3 @@
-import Vec2 from "../math/vec2.mjs";
-import ColliderNode from "../nodes/collider.mjs";
-
 const SUBDIVISIONS_PER_AXIS = 8; // increase this if bullet spam ends up very laggy; increases memory usage
 
 function generateSubareas() {

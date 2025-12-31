@@ -5,7 +5,7 @@ function clamp(n) {
 }
 
 export function lerp(a, b, n) {
-	return a + clamp(n) * (b-a);
+	return a + n * (b-a);
 }
 
 export function smoothstep(a, b, n) {

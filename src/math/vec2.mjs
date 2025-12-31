@@ -1,6 +1,11 @@
 export default class Vec2 {
 	x; y;
 
+	static fromGeometric(angle, length) {
+		const x = Math.cos(angle) * length;
+		const y = Math.sin(angle) * length;
+		return new Vec2(x, y);
+	}
 	constructor(x = 0, y = 0) {
 		this.x = x;
 		this.y = y;
@@ -36,5 +41,19 @@ export default class Vec2 {
 	zero() {
 		this.x = 0;
 		this.y = 0;
+	}
+	normalized() {
+		const normal = this.copy();
+		normal.divide(Math.sqrt(this.lengthSquared()));
+		return normal;
+	}
+	angle() {
+		const unitVector = this.normalized();
+		if (unitVector.x > 0) {
+			return Math.asin(unitVector.y);
+		}
+		else {
+			return Math.PI - Math.asin(unitVector.y);
+		}
 	}
 }

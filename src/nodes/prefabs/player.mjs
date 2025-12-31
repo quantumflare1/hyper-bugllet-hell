@@ -1,6 +1,5 @@
 import Vec2 from "../../math/vec2.mjs";
 import PlayerConstants from "../../constant_defs/player_constants.json" with { type: "json" };
-import { keys } from "../../core/input_handler.mjs";
 import { assets } from "../../core/asset_manager.mjs";
 import Bullet from "./bullet.mjs";
 import Actor from "./actor.mjs";
@@ -24,7 +23,7 @@ export default class Player extends Actor {
 			texture: assets.player,
 			anchor: 0.5
 		};
-		super(parent, position, health, hitbox, sprite);
+		super(parent, position, new Vec2(0, 0), health, hitbox, sprite);
 
 		this.controls = new PlayerControl(this);
 		this.addChild(this.controls);
@@ -47,7 +46,7 @@ export default class Player extends Actor {
 
 		if (this.isShooting && this.remainingAttackCooldown <= 0) {
 			this.remainingAttackCooldown = this.attackCooldown;
-			new Bullet(this.parent, this.position.copy(), "player");
+			new Bullet(this.parent, this.position.copy(), new Vec2(0, -960), "player");
 		}
 
 		for (const i of this.parent.collisionManager.colliding(this.collider)) {
