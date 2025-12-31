@@ -2,8 +2,8 @@
 	"test": {
 		"hitbox": {
 			"rangeX": 0,
-			"rangeY": 0,
-			"radius": 10
+			"rangeY": 7,
+			"radius": 8
 		},
 		"sprite": "enemy",
 		"health": 10
