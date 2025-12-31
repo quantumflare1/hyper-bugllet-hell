@@ -12,4 +12,8 @@ export default class Level extends Scene {
 			self.addChild(new StateMachine(self, ...res.default));
 		});
 	}
+	addPlayer(player) {
+		this.addChild(player);
+		this.player = player;
+	}
 }

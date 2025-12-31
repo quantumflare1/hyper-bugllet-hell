@@ -32,12 +32,10 @@ export default class Enemy extends Actor {
 			if (i.parent instanceof Bullet && !i.parent.alreadyCollided.has(this)) {
 				i.parent.alreadyCollided.add(this);
 				this.health -= i.parent.health;
-				console.log("ow i am at " + this.health + " health")
 			}
-		} // note: iframes aren't a thing and also damage is dealth 4 times for some reason
+		}
 		if (this.health <= 0) {
-			this.parent.removeChild(this);
-			this.sprite.destroy();
+			this.despawn();
 			dispatchEvent(new CustomEvent("game_enemydefeat", { detail: 1 }))
 		}
 	}

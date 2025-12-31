@@ -36,11 +36,6 @@ export default class Bullet extends Actor {
 		super.tick(ticker);
 
 		super.move(ticker);
-
-		if (this.position.x < -GlobalConstants.FIELD_WIDTH || this.position.x > GlobalConstants.FIELD_WIDTH * 2 || this.position.y < -GlobalConstants.FIELD_HEIGHT || this.position.y > GlobalConstants.FIELD_HEIGHT * 2) {
-			this.parent.removeChild(this);
-			this.sprite.destroy();
-		}
 	}
 	setColor(tint) {
 		this.sprite.sprite.tint = tint;

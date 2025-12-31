@@ -3,7 +3,7 @@
 		"hitbox": {
 			"rangeX": 0,
 			"rangeY": 7,
-			"radius": 8
+			"radius": 12
 		},
 		"sprite": "enemy",
 		"health": 10
