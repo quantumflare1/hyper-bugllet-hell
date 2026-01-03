@@ -1,0 +1,7 @@
+{
+	"player": "player_temp.png",
+	"playerDamaged": "player_damage.png",
+	"bulletSheet": "spritesheet/bullets.json",
+	"enemy": "enemy_cerana.png",
+	"font": "fonts/NotJamLaika11.fnt"
+}
