@@ -56,19 +56,7 @@ export default class Player extends Actor {
 				console.log("OW OW OW");
 
 				if (this.health <= 0) {
-					// todo: move this to level code
-					const text = new BitmapText({
-						text: "YOU SNOOZE YOU LOSE!",
-						style: {
-							fontFamily: "Not Jam Laika 11",
-							fontSize: 11,
-							fill: 0xffffff
-						}
-					});
-					text.position.set(20, 20);
-					this.parent.display.addChild(text);
-
-					this.parent.pause();
+					dispatchEvent(new Event("game_playerdefeat"));
 				}
 			}
 		}
