@@ -1,5 +1,4 @@
 import Prefab from "./prefab.mjs";
-import { clamp } from "../../math/utils.mjs";
 
 export default class MenuPage extends Prefab {
 	buttons = [];
