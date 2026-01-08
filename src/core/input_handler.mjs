@@ -1,9 +1,9 @@
+import Vec2 from "../math/vec2.mjs";
+
 const keys = new Set();
 const mouse = {
-	x: 0,
-	y: 0,
-	moveX: 0,
-	moveY: 0,
+	position: new Vec2(0, 0),
+	move: new Vec2(0, 0),
 	pressed: 0
 };
 
@@ -28,10 +28,10 @@ function mousedown(e) {
 }
 
 function mousemove(e) {
-	mouse.x = e.clientX; // relative to the whole screen rn
-	mouse.y = e.clientY;
-	mouse.moveX = e.movementX;
-	mouse.moveY = e.movementY;
+	mouse.position.x = e.clientX; // relative to the whole screen rn
+	mouse.position.y = e.clientY;
+	mouse.move.x = e.movementX;
+	mouse.move.y = e.movementY;
 }
 
 export { keys, mouse };

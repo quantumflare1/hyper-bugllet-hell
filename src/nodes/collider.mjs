@@ -9,6 +9,16 @@ export default class ColliderNode extends Node {
 	radius;
 	manager;
 
+	// returns a collidernodelike: doesn't need a parent or manager
+	static fromPoint(vec, layer = 0) {
+		return {
+			position: vec,
+			range: 0,
+			radius: 0,
+			layer: layer
+		};
+	}
+
 	constructor(parent, manager, range, radius, layer, stage = null) {
 		super(parent);
 		parent.collider = this;
@@ -70,6 +80,7 @@ export default class ColliderNode extends Node {
 		return Math.min(myCapToOther, myButtToOther, yourCapToOther, yourButtToOther) < (this.radius + other.radius) ** 2;
 	}
 	tick(ticker) {
+		super.tick(ticker);
 		this.manager.moveCollider(this, this.parent.prevPosition);
 	}
 }

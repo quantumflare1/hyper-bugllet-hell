@@ -1,15 +1,20 @@
-## v0.03 ()
+## v0.05 ()
+
+Happy new year! (i don't care if i'm x weeks late still valid)
 
 ### Additions
+
+- Menu system
 
 ### Changes
 
 ### Bugfixes/Technical
 
+- Fixed screen scaling "bug"
+	- it turns out for some reason i had it zoomed in 200% on my local server and not on the actual website
 - Rewrote asset loading system
 - Rewrote text system
-	- For reasons beyond me the health and score no longer align to the pixel grid
-- Updated input handling to process single presses, not just holds
+	- For reasons beyond me certain text no longer aligns to the pixel grid
 
 ## v0.02 (25/12/31)
 

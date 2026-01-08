@@ -1,11 +1,13 @@
 export default class Vec2 {
 	x; y;
 
+	static zero = new Vec2(0, 0);
 	static fromGeometric(angle, length) {
 		const x = Math.cos(angle) * length;
 		const y = Math.sin(angle) * length;
 		return new Vec2(x, y);
 	}
+
 	constructor(x = 0, y = 0) {
 		this.x = x;
 		this.y = y;

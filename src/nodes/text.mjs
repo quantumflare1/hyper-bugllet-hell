@@ -19,7 +19,6 @@ export default class TextNode extends Node {
 		});
 
 		this.text.anchor = anchor;
-		this.text.roundPixels = true;
 		this.text.position.set(this.position.x, this.position.y);
 
 		stage.addChild(this.text);

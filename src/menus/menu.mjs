@@ -1,15 +1,37 @@
-import Node from "./node.mjs";
-import { keys } from "../core/input_handler.mjs";
+import Scene from "../core/scene.mjs";
+import StateMachine from "../nodes/state_machine.mjs";
+import * as Input from "../core/input_handler.mjs";
+import Vec2 from "../math/vec2.mjs";
 
-export default class MenuControl extends Node {
+export default class Menu extends Scene {
+	menus = [];
+	currentMenu = 0;
+	selectedButton;
+	
 	upPressed = false;
 	downPressed = false;
 	leftPressed = false;
 	rightPressed = false;
 	selectPressed = false;
 
+
+
+	constructor(display, id) {
+		super(display);
+
+		const self = this;
+		import(`./menu_${id}.mjs`).then((res) => {
+			self.addChild(new StateMachine(self, ...res.default));
+		});
+	}
 	tick(ticker) {
-		if (keys.has("ArrowUp")) {
+		super.tick(ticker);
+
+		if (this.state)
+			this.currentMenu = this.state.currentState;
+
+		// input handling garbage
+		if (Input.keys.has("ArrowUp")) {
 			if (!this.upPressed) {
 				this.parent.selectedButton = this.parent.up[this.parent.selectedButton];
 				this.upPressed = true;
@@ -18,7 +40,7 @@ export default class MenuControl extends Node {
 		else {
 			this.upPressed = false;
 		}
-		if (keys.has("ArrowDown")) {
+		if (Input.keys.has("ArrowDown")) {
 			if (!this.downPressed) {
 				this.parent.selectedButton = this.parent.down[this.parent.selectedButton];
 				this.downPressed = true;
@@ -27,7 +49,7 @@ export default class MenuControl extends Node {
 		else {
 			this.downPressed = false;
 		}
-		if (keys.has("ArrowRight")) {
+		if (Input.keys.has("ArrowRight")) {
 			if (!this.rightPressed) {
 				this.parent.selectedButton = this.parent.right[this.parent.selectedButton];
 				this.rightPressed = true;
@@ -36,7 +58,7 @@ export default class MenuControl extends Node {
 		else {
 			this.rightPressed = false;
 		}
-		if (keys.has("ArrowLeft")) {
+		if (Input.keys.has("ArrowLeft")) {
 			if (!this.leftPressed) {
 				this.parent.selectedButton = this.parent.left[this.parent.selectedButton];
 				this.leftPressed = true;
@@ -45,7 +67,7 @@ export default class MenuControl extends Node {
 		else {
 			this.leftPressed = false;
 		}
-		if (keys.has("KeyZ")) {
+		if (Input.keys.has("KeyZ")) {
 			if (!this.selectPressed) {
 				this.parent.selectedButton.execute();
 				this.selectPressed = true;
@@ -53,6 +75,12 @@ export default class MenuControl extends Node {
 		}
 		else {
 			this.selectPressed = false;
+		}
+
+		if (!Input.mouse.move.equals(Vec2.zero)) {
+			// if colliding with a button: highlight it
+			// if not: unhighlight it
+			// if pressing left click: execute it
 		}
 	}
 }
