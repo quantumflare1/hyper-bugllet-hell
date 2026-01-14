@@ -15,18 +15,22 @@ export default class Vec2 {
 	add(vec) {
 		this.x += vec.x;
 		this.y += vec.y;
+		return this;
 	}
 	subtract(vec) {
 		this.x -= vec.x;
 		this.y -= vec.y;
+		return this;
 	}
 	multiply(n) {
 		this.x *= n;
 		this.y *= n;
+		return this;
 	}
 	divide(n) {
 		this.x /= n;
 		this.y /= n;
+		return this;
 	}
 	dot(vec) {
 		return this.x * vec.x + this.y * vec.y;

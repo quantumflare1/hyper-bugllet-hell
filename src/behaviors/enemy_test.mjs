@@ -78,8 +78,8 @@ function fire() {
 	if (this.state.timePassed - this.state.memories.lastFireTime > FIRE_COOLDOWN) {
 		this.state.memories.lastFireTime = this.state.timePassed;
 		const spread = BASE_SPREAD - (this.state.timePassed - this.state.memories.startTime) / 1000 * SPREAD_DECREASE_RATE; // i need a better way to track time passing lol
-		const toPlayer = this.state.memories.target.copy();
-		toPlayer.subtract(this.position);
+		const toPlayer = this.state.memories.target.copy().subtract(this.position);
+
 		const currentAngle = toPlayer.angle() + Math.cos(this.state.timePassed - this.state.memories.startTime) * spread;
 		const currentSpeed = 60 + (this.state.timePassed - this.state.memories.startTime) / 10;
 
