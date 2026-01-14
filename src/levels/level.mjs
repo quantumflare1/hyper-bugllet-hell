@@ -1,4 +1,5 @@
 import Scene from "../core/scene.mjs";
+import Player from "../nodes/prefabs/player.mjs";
 import StateMachine from "../nodes/state_machine.mjs";
 import { BitmapText } from "pixi.js";
 
@@ -11,6 +12,7 @@ export default class Level extends Scene {
 		const self = this;
 		import(`./level_${id}.mjs`).then((res) => {
 			self.addChild(new StateMachine(self, ...res.default));
+			self.addPlayer(new Player(self, res.player.position, res.player.health));
 		});
 		addEventListener("game_playerdefeat", this.lose.bind(this));
 	}

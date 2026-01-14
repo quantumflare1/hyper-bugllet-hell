@@ -4,7 +4,7 @@ Happy new year! (i don't care if i'm x weeks late still valid)
 
 ### Additions
 
-- Main menu
+- A main menu!!
 
 ### Changes
 

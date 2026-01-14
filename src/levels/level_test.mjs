@@ -2,6 +2,7 @@ import { randomIntBetween } from "../math/utils.mjs";
 import Vec2 from "../math/vec2.mjs";
 import Enemy from "../nodes/prefabs/enemy.mjs";
 import GlobalConstants from "../constant_defs/global_constants.json";
+import Player from "../nodes/prefabs/player.mjs";
 
 function testWave() {
 	if ("interval" in this.state.memories) {
@@ -17,4 +18,10 @@ function testWave() {
 	return 0;
 }
 
+const player = {
+	position: new Vec2(240, 240),
+	health: 3
+};
+
+export { player };
 export default [testWave];
