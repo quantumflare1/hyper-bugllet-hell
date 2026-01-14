@@ -1,7 +1,8 @@
 import Scene from "../core/scene.mjs";
 import StateMachine from "../nodes/state_machine.mjs";
-import * as Input from "../core/input_handler.mjs";
+import { keys, mouse } from "../core/input_handler.mjs";
 import Vec2 from "../math/vec2.mjs";
+import ColliderNode from "../nodes/collider.mjs";
 
 export default class Menu extends Scene {
 	menus = [];
@@ -31,7 +32,7 @@ export default class Menu extends Scene {
 			this.currentMenu = this.state.currentState;
 
 		// input handling garbage
-		if (Input.keys.has("ArrowUp")) {
+		if (keys.has("ArrowUp")) {
 			if (!this.upPressed) {
 				this.parent.selectedButton = this.parent.up[this.parent.selectedButton];
 				this.upPressed = true;
@@ -40,7 +41,7 @@ export default class Menu extends Scene {
 		else {
 			this.upPressed = false;
 		}
-		if (Input.keys.has("ArrowDown")) {
+		if (keys.has("ArrowDown")) {
 			if (!this.downPressed) {
 				this.parent.selectedButton = this.parent.down[this.parent.selectedButton];
 				this.downPressed = true;
@@ -49,7 +50,7 @@ export default class Menu extends Scene {
 		else {
 			this.downPressed = false;
 		}
-		if (Input.keys.has("ArrowRight")) {
+		if (keys.has("ArrowRight")) {
 			if (!this.rightPressed) {
 				this.parent.selectedButton = this.parent.right[this.parent.selectedButton];
 				this.rightPressed = true;
@@ -58,7 +59,7 @@ export default class Menu extends Scene {
 		else {
 			this.rightPressed = false;
 		}
-		if (Input.keys.has("ArrowLeft")) {
+		if (keys.has("ArrowLeft")) {
 			if (!this.leftPressed) {
 				this.parent.selectedButton = this.parent.left[this.parent.selectedButton];
 				this.leftPressed = true;
@@ -67,7 +68,7 @@ export default class Menu extends Scene {
 		else {
 			this.leftPressed = false;
 		}
-		if (Input.keys.has("KeyZ")) {
+		if (keys.has("KeyZ")) {
 			if (!this.selectPressed) {
 				this.parent.selectedButton.execute();
 				this.selectPressed = true;
@@ -75,12 +76,6 @@ export default class Menu extends Scene {
 		}
 		else {
 			this.selectPressed = false;
-		}
-
-		if (!Input.mouse.move.equals(Vec2.zero)) {
-			// if colliding with a button: highlight it
-			// if not: unhighlight it
-			// if pressing left click: execute it
 		}
 	}
 }

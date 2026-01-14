@@ -35,7 +35,7 @@ export default class ColliderNode extends Node {
 		manager?.addCollider(this);
 	}
 	collidesWith(other) {
-		// stupid chud geometry
+		// this code scares me because i haven't looked at it since i wrote it and now none of it makes sense to me
 		const capToCap = other.position.copy();
 		capToCap.subtract(other.range);
 		capToCap.subtract(this.position);
@@ -64,20 +64,20 @@ export default class ColliderNode extends Node {
 		const myLength = me.lengthSquared();
 		const yourLength = you.lengthSquared();
 
-		const myCapToOther = (yourLength === 0) ?
+		const myCapToYou = (yourLength === 0) ?
 			capToCapLength - ((capToCapLength + yourLength - capToButtLength) ** 2 / (4 * yourLength)) :
 			capToCapLength;
-		const myButtToOther = (yourLength === 0) ?
+		const myButtToYou = (yourLength === 0) ?
 			buttToCapLength - ((buttToCapLength + yourLength - buttToButtLength) ** 2 / (4 * yourLength)) :
 			buttToCapLength;
-		const yourCapToOther = (myLength === 0) ?
+		const yourCapToMe = (myLength === 0) ?
 			capToCapLength - ((capToCapLength + myLength - buttToCapLength) ** 2 / (4 * myLength)) :
 			capToCapLength;
-		const yourButtToOther = (myLength === 0) ?
+		const yourButtToMe = (myLength === 0) ?
 			buttToCapLength - ((capToButtLength + myLength - buttToButtLength) ** 2 / (4 * myLength)) :
 			buttToCapLength;
 
-		return Math.min(myCapToOther, myButtToOther, yourCapToOther, yourButtToOther) < (this.radius + other.radius) ** 2;
+		return Math.min(myCapToYou, myButtToYou, yourCapToMe, yourButtToMe) < (this.radius + other.radius) ** 2;
 	}
 	tick(ticker) {
 		super.tick(ticker);

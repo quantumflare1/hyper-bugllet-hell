@@ -1,4 +1,4 @@
-import { keys, mouse } from "./core/input_handler.mjs";
+import { keys, mouse, init as initInput } from "./core/input_handler.mjs";
 import { init as initAssets } from "./core/asset_manager.mjs";
 import { Application } from "pixi.js";
 import main from "./main_scene.mjs";
@@ -7,6 +7,7 @@ import GlobalConstants from "./constant_defs/global_constants.json";
 async function init() {
 	await initAssets();
 	const app = await initializeApp();
+	initInput();
 
 	const scene = main(app);
 }
