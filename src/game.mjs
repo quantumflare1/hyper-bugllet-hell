@@ -4,12 +4,15 @@ import { Application } from "pixi.js";
 import main from "./main_scene.mjs";
 import GlobalConstants from "./constant_defs/global_constants.json";
 
+let activeScene;
+let stage;
+
 async function init() {
 	await initAssets();
-	const app = await initializeApp();
+	await initializeApp();
 	initInput();
 
-	const scene = main(app);
+	activeScene = main();
 }
 
 async function initializeApp() {
@@ -22,7 +25,14 @@ async function initializeApp() {
 	});
 
 	document.getElementById("pixi-container").appendChild(app.canvas);
-	return app;
+	stage = app.stage;
+	//return app;
 }
 
-export { init, keys, mouse };
+function swapScenes(newScene) {
+	activeScene.unload();
+	activeScene = newScene;
+	newScene.reload();
+}
+
+export { init, swapScenes, stage };

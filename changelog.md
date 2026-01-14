@@ -4,14 +4,14 @@ Happy new year! (i don't care if i'm x weeks late still valid)
 
 ### Additions
 
-- Menu system
+- Main menu
 
 ### Changes
 
 ### Bugfixes/Technical
 
 - Fixed screen scaling "bug"
-	- it turns out for some reason i had it zoomed in 200% on my local server and not on the actual website
+	- it turns out for some reason i had it zoomed in 200% on localhost and not on the actual website
 - Rewrote asset loading system
 - Rewrote text system
 	- For reasons beyond me certain text no longer aligns to the pixel grid

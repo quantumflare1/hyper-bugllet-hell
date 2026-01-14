@@ -1,6 +1,6 @@
 import Scene from "../core/scene.mjs";
 import StateMachine from "../nodes/state_machine.mjs";
-import { keys, mouse } from "../core/input_handler.mjs";
+import { keys } from "../core/input_handler.mjs";
 import Vec2 from "../math/vec2.mjs";
 import ColliderNode from "../nodes/collider.mjs";
 

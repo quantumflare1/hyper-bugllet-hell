@@ -17,14 +17,14 @@ export default class MenuButton extends Prefab {
 	buttonBottom;
 	heldDown;
 
-	constructor(parent, position, option, dimensions, sprite, label) {
+	constructor(parent, position, dimensions, action, sprite, label) {
 		super(parent);
 		this.position = position;
 		this.prevPosition = position;
 		this.label = label;
 		this.heldDown = false;
 
-		this.execute = option;
+		this.execute = action;
 		super.addChild(new ButtonRectNode(this, dimensions));
 		super.addChild(new NineSliceSpriteNode(this, parent.display, sprite.texture, sprite.cornerSize, sprite.width, sprite.height, sprite.anchor));
 		super.addChild(new TextNode(this, parent.display, label, 0.5)); // bleh
