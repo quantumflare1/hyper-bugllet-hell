@@ -4,6 +4,7 @@ import StateMachine from "../state_machine.mjs";
 import Actor from "./actor.mjs";
 import EnemyData from "../../data/enemy_data.json";
 import Bullet from "./bullet.mjs";
+import TimerNode from "../timer.mjs";
 
 export default class Enemy extends Actor {
 	constructor(parent, position, id) {
@@ -22,6 +23,7 @@ export default class Enemy extends Actor {
 		import(`../../behaviors/enemy_${id}.mjs`).then((res) => {
 			self.addChild(new StateMachine(self, ...res.default));
 		});
+		this.addChild(new TimerNode(this));
 	}
 	tick(ticker) {
 		super.tick(ticker);

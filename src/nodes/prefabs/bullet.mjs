@@ -4,6 +4,7 @@ import BulletData from "../../data/bullet_data.json" with { type: "json" };
 import StateMachine from "../state_machine.mjs";
 import Actor from "./actor.mjs";
 import SpriteNode from "../sprite.mjs";
+import TimerNode from "../timer.mjs";
 
 export default class Bullet extends Actor {
 	alreadyCollided = new Set();
@@ -25,6 +26,7 @@ export default class Bullet extends Actor {
 			anchor: 0.5
 		};
 		this.sprite.addChild(new SpriteNode(this.sprite, parent.display, fill.texture, fill.anchor, color));
+		this.addChild(new TimerNode(this));
 
 		const self = this;
 		import(`../../behaviors/bullet_${id}.mjs`).then((res) => {

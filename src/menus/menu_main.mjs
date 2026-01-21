@@ -16,9 +16,10 @@ const menus = [
 	]
 ];
 
+// still have to figure out how different menu pages is going to work
+
 // 0
 function noMenu() {
-	// should initialize all the menus yk
 	this.menus.push([]);
 	let menuCount = 0;
 	for (const i of menus) {
