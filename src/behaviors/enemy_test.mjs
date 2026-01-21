@@ -64,6 +64,8 @@ const SPREAD_DECREASE_RATE = Math.PI / 9;
 const INITIAL_COOLDOWN = 300;
 const FIRE_COOLDOWN = 60;
 const ATTACK_TIME = 1000;
+const BASE_BULLET_SPEED = 60;
+const BULLET_SPEED_TIME_SCALING = 10;
 
 // 1
 function fire() {
@@ -81,7 +83,7 @@ function fire() {
 		const toPlayer = this.state.memories.target.copy().subtract(this.position);
 
 		const currentAngle = toPlayer.angle() + Math.cos(this.timer.timePassed) * spread;
-		const currentSpeed = 60 + this.timer.timePassed / 10;
+		const currentSpeed = BASE_BULLET_SPEED + this.timer.timePassed / BULLET_SPEED_TIME_SCALING;
 
 		new Bullet(this.parent, this.position.copy(), Vec2.fromGeometric(currentAngle, currentSpeed), "default", 0xff0000);
 	}

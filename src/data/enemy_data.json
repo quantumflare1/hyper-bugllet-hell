@@ -5,7 +5,16 @@
 			"rangeY": 7,
 			"radius": 12
 		},
-		"sprite": "enemy",
+		"sprite": "cerana",
 		"health": 10
+	},
+	"mayfly": {
+		"hitbox": {
+			"rangeX": 0,
+			"rangeY": 5,
+			"radius": 10
+		},
+		"sprite": "cerana",
+		"health": 3
 	}
 }

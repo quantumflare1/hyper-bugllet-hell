@@ -2,6 +2,7 @@ import Scene from "../core/scene.mjs";
 import Player from "../nodes/prefabs/player.mjs";
 import StateMachine from "../nodes/state_machine.mjs";
 import { BitmapText } from "pixi.js";
+import TimerNode from "../nodes/timer.mjs";
 
 export default class Level extends Scene {
 	enemies = new Set();
@@ -14,6 +15,7 @@ export default class Level extends Scene {
 			self.addChild(new StateMachine(self, ...res.default));
 			self.addPlayer(new Player(self, res.player.position, res.player.health));
 		});
+		this.addChild(new TimerNode(this));
 		addEventListener("game_playerdefeat", this.lose.bind(this));
 	}
 	addPlayer(player) {

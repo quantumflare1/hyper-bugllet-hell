@@ -10,6 +10,17 @@
 		"innerSprite": "default_bullet_fill.png",
 		"health": 1
 	},
+	"gravity": {
+		"hitbox": {
+			"rangeX": 0,
+			"rangeY": 0,
+			"radius": 2,
+			"layer": 0
+		},
+		"sprite": "tiny_bullet.png",
+		"innerSprite": "tiny_bullet_fill.png",
+		"health": 1
+	},
 	"player": {
 		"hitbox": {
 			"rangeX": 0,
