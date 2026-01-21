@@ -47,9 +47,13 @@ const INITIAL_WAIT = 1000;
 
 // 3
 function initialWait() {
-	this.timer.mark();
+	if (!("waiting" in this.state.memories)) {
+		this.timer.mark();
+		this.state.memories.waiting = true;
+	}
 
 	if (this.timer.timePassed > INITIAL_WAIT) {
+		delete this.state.memories.waiting;
 		return 1;
 	}
 	return 3;
@@ -99,9 +103,13 @@ const WAIT_TIME = 2500;
 
 // 4
 function wait() {
-	this.timer.mark();
+	if (!("waiting" in this.state.memories)) {
+		this.timer.mark();
+		this.state.memories.waiting = true;
+	}
 
 	if (this.timer.timePassed > WAIT_TIME) {
+		delete this.state.memories.waiting;
 		return 1;
 	}
 	return 4;
