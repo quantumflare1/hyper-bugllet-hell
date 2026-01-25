@@ -5,6 +5,7 @@ Happy new year! (i don't care if i'm x weeks late still valid)
 ### Additions
 
 - A main menu!!
+- One new enemy: the mayfly
 
 ### Changes
 

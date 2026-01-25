@@ -1,3 +1,4 @@
+import { randomIntBetween } from "../math/utils.mjs";
 import Vec2 from "../math/vec2.mjs";
 import Bullet from "../nodes/prefabs/bullet.mjs";
 
@@ -29,7 +30,8 @@ const BASE_BULLET_SPEED = 0;
 function fire() {
 	this.velocity.y = -MAX_Y_VELOCITY;
 
-	new Bullet(this.parent, this.position.copy(), new Vec2(0, BASE_BULLET_SPEED), "gravity", 0x80ffb8);
+	if (randomIntBetween(0,3) === 0)
+		new Bullet(this.parent, this.position.copy(), new Vec2(0, BASE_BULLET_SPEED), "gravity", 0x80ffb8);
 	return 1;
 }
 

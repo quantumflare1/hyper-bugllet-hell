@@ -3,7 +3,7 @@
 	"playerDamaged": "player_damage.png",
 	"bulletSheet": "spritesheet/bullets.json",
 	"cerana": "enemy_cerana.png",
-	"hexagenia": "enemy_cerana.png",
+	"hexagenia": "enemy_hexagenia.png",
 	"font": "fonts/NotJamLaika11.fnt",
 	"button": "button.png"
 }
