@@ -9,6 +9,16 @@ export default class ColliderNode extends Node {
 	radius;
 	manager;
 
+	// returns a collidernodelike: doesn't need a parent or manager
+	static fromPoint(vec, layer = 0) {
+		return {
+			position: vec,
+			range: 0,
+			radius: 0,
+			layer: layer
+		};
+	}
+
 	constructor(parent, manager, range, radius, layer, stage = null) {
 		super(parent);
 		parent.collider = this;
@@ -25,27 +35,13 @@ export default class ColliderNode extends Node {
 		manager?.addCollider(this);
 	}
 	collidesWith(other) {
-		// stupid chud geometry
-		const capToCap = other.position.copy();
-		capToCap.subtract(other.range);
-		capToCap.subtract(this.position);
-		capToCap.subtract(this.range);
-		const capToButt = other.position.copy();
-		capToButt.add(other.range);
-		capToButt.subtract(this.position);
-		capToButt.subtract(this.range);
-		const buttToCap = other.position.copy();
-		buttToCap.subtract(other.range);
-		buttToCap.subtract(this.position);
-		buttToCap.add(this.range);
-		const buttToButt = other.position.copy();
-		buttToButt.add(other.range);
-		buttToButt.subtract(this.position);
-		buttToButt.add(this.range);
-		const me = this.range.copy();
-		me.subtract(this.position);
-		const you = other.range.copy();
-		you.subtract(other.position);
+		// this code scares me because i haven't looked at it since i wrote it and now none of it makes sense to me
+		const capToCap = other.position.copy()	.subtract(other.range)	.subtract(this.position).subtract(this.range);
+		const capToButt = other.position.copy()	.add(other.range)		.subtract(this.position).subtract(this.range);
+		const buttToCap = other.position.copy()	.subtract(other.range)	.subtract(this.position).add(this.range);
+		const buttToButt = other.position.copy().add(other.range)		.subtract(this.position).add(this.range);
+		const me = this.range.copy().subtract(this.position);
+		const you = other.range.copy().subtract(other.position);
 
 		const capToCapLength = capToCap.lengthSquared();
 		const capToButtLength = capToButt.lengthSquared();
@@ -54,22 +50,23 @@ export default class ColliderNode extends Node {
 		const myLength = me.lengthSquared();
 		const yourLength = you.lengthSquared();
 
-		const myCapToOther = (yourLength === 0) ?
+		const myCapToYou = (yourLength === 0) ?
 			capToCapLength - ((capToCapLength + yourLength - capToButtLength) ** 2 / (4 * yourLength)) :
 			capToCapLength;
-		const myButtToOther = (yourLength === 0) ?
+		const myButtToYou = (yourLength === 0) ?
 			buttToCapLength - ((buttToCapLength + yourLength - buttToButtLength) ** 2 / (4 * yourLength)) :
 			buttToCapLength;
-		const yourCapToOther = (myLength === 0) ?
+		const yourCapToMe = (myLength === 0) ?
 			capToCapLength - ((capToCapLength + myLength - buttToCapLength) ** 2 / (4 * myLength)) :
 			capToCapLength;
-		const yourButtToOther = (myLength === 0) ?
+		const yourButtToMe = (myLength === 0) ?
 			buttToCapLength - ((capToButtLength + myLength - buttToButtLength) ** 2 / (4 * myLength)) :
 			buttToCapLength;
 
-		return Math.min(myCapToOther, myButtToOther, yourCapToOther, yourButtToOther) < (this.radius + other.radius) ** 2;
+		return Math.min(myCapToYou, myButtToYou, yourCapToMe, yourButtToMe) < (this.radius + other.radius) ** 2;
 	}
 	tick(ticker) {
+		super.tick(ticker);
 		this.manager.moveCollider(this, this.parent.prevPosition);
 	}
 }

@@ -6,6 +6,10 @@ export function randomNumBetween(a, b) {
 	return Math.random() * (b - a) + a;
 }
 
+export function pickRandom(...options) {
+	return options[Math.trunc(Math.random() * options.length)];
+}
+
 export function clamp(n, min, max) {
 	if (n < min) return min;
 	if (n > max) return max;

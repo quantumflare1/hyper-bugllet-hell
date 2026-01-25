@@ -24,27 +24,33 @@ export default class CollisionManager {
 	}
 	getColliderSubareas(collider) {
 		// probably faster but less accurate AABB test
-		const cap = collider.position.copy();
-		cap.subtract(collider.range);
-		const butt = collider.position.copy();
-		butt.add(collider.range);
+		try {
+			const cap = collider.position.copy();
+			cap.subtract(collider.range);
+			const butt = collider.position.copy();
+			butt.add(collider.range);
 
-		const leftmost = Math.min(cap.x, butt.x);
-		const rightmost = Math.max(cap.x, butt.x);
-		const topmost = Math.min(cap.y, butt.y);
-		const bottommost = Math.max(cap.y, butt.y);
-		const left = Math.trunc((leftmost - collider.radius) / this.subareaDimensions.x);
-		const right = Math.trunc((rightmost + collider.radius) / this.subareaDimensions.x);
-		const top = Math.trunc((topmost - collider.radius) / this.subareaDimensions.x);
-		const bottom = Math.trunc((bottommost + collider.radius) / this.subareaDimensions.x);
+			const leftmost = Math.min(cap.x, butt.x);
+			const rightmost = Math.max(cap.x, butt.x);
+			const topmost = Math.min(cap.y, butt.y);
+			const bottommost = Math.max(cap.y, butt.y);
+			const left = Math.trunc((leftmost - collider.radius) / this.subareaDimensions.x);
+			const right = Math.trunc((rightmost + collider.radius) / this.subareaDimensions.x);
+			const top = Math.trunc((topmost - collider.radius) / this.subareaDimensions.x);
+			const bottom = Math.trunc((bottommost + collider.radius) / this.subareaDimensions.x);
 
-		if (left < 0 || right >= SUBDIVISIONS_PER_AXIS || top < 0 || bottom >= SUBDIVISIONS_PER_AXIS) return null;
-		return {
-			left: left,
-			right: right,
-			top: top,
-			bottom: bottom
-		};
+			if (left < 0 || right >= SUBDIVISIONS_PER_AXIS || top < 0 || bottom >= SUBDIVISIONS_PER_AXIS) return null;
+			return {
+				left: left,
+				right: right,
+				top: top,
+				bottom: bottom
+			};
+		}
+		catch (e) {
+			console.log(collider)
+			throw new Error("Couldn't calculate collider length: " + e);
+		}
 	}
 	addCollider(collider) {
 		const subareas = this.getColliderSubareas(collider);

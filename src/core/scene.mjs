@@ -1,7 +1,8 @@
-import { Ticker } from "pixi.js";
+import { Container, Ticker } from "pixi.js";
 import CollisionManager from "./collision_manager.mjs";
 import Vec2 from "../math/vec2.mjs";
 import GlobalConstants from "../constant_defs/global_constants.json";
+import { stage } from "../game.mjs";
 
 export default class Scene {
 	display;
@@ -10,7 +11,8 @@ export default class Scene {
 	collisionManager = new CollisionManager(new Vec2(GlobalConstants.FIELD_WIDTH, GlobalConstants.FIELD_HEIGHT));
 
 	constructor(display) {
-		this.display = display;
+		this.display = new Container({ isRenderGroup: true });
+		display.addChild(this.display);
 		this.ticker.maxFPS = 60;
 		this.ticker.autoStart = true;
 		this.ticker.add(this.tick.bind(this));
@@ -32,5 +34,13 @@ export default class Scene {
 	}
 	resume() {
 		this.ticker.start();
+	}
+	unload() {
+		this.pause();
+		stage.removeChild(this.display);
+	}
+	reload() {
+		this.resume();
+		stage.addChild(this.display);
 	}
 }
