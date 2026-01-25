@@ -1,6 +1,6 @@
-## v0.05 ()
+## v0.05 (26/01/25)
 
-Happy new year! (i don't care if i'm x weeks late still valid)
+Happy new year! (i don't care if i'm 3 weeks late still valid)
 
 ### Additions
 
@@ -8,6 +8,8 @@ Happy new year! (i don't care if i'm x weeks late still valid)
 - One new enemy: the mayfly
 
 ### Changes
+
+- Removed life and score displays temporarily
 
 ### Bugfixes/Technical
 
