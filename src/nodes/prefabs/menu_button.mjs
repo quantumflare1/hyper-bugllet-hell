@@ -28,7 +28,7 @@ export default class MenuButton extends Prefab {
 		super.addChild(new ButtonRectNode(this, dimensions));
 		super.addChild(new NineSliceSpriteNode(this, parent.display, sprite.texture, sprite.cornerSize, sprite.width, sprite.height, sprite.anchor));
 		super.addChild(new TextNode(this, parent.display, label, 0.5)); // bleh
-		console.log(this.sprite.source)
+
 		this.sprite.source.eventMode = "static";
 		this.sprite.source.onpointerdown = this.execute.bind(this);
 		this.sprite.source.onpointerover = this.highlight.bind(this);
