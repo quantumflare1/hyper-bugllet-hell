@@ -15,7 +15,6 @@ const MAX_Y_VELOCITY = 100;
 
 // 1
 function fall() {
-	console.log(this.velocity)
 	this.velocity.y += Y_ACCEL;
 
 	if (this.velocity.y > MAX_Y_VELOCITY) {

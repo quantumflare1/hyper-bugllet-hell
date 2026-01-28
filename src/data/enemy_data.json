@@ -11,8 +11,8 @@
 	"mayfly": {
 		"hitbox": {
 			"rangeX": 0,
-			"rangeY": 5,
-			"radius": 10
+			"rangeY": 0,
+			"radius": 15
 		},
 		"sprite": "hexagenia",
 		"health": 3
